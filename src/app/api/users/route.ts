@@ -2,13 +2,25 @@ import { NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 import { query } from '@/lib/db';
 import { getSession } from '@/lib/auth';
+import { SessionPayload } from '@/types';
+
+function isValidSession(session: unknown): session is SessionPayload {
+    if (!session || typeof session !== 'object') return false;
+    const s = session as Record<string, unknown>;
+    return (
+        typeof s.id === 'number' &&
+        typeof s.role === 'string' &&
+        typeof s.username === 'string'
+    );
+}
 
 // GET /api/users
 export async function GET() {
     try {
         const session = await getSession();
-        if (!session || !['fulladmin', 'admin'].includes(session.role as string)) {
-            return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
+
+        if (!isValidSession(session) || !['fulladmin', 'admin'].includes(session.role)) {
+            return NextResponse.json({ success: false, message: 'Forbidden' }, { status: 403 });
         }
 
         const users = await query(
@@ -26,8 +38,9 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         const session = await getSession();
-        if (!session || session.role !== 'fulladmin') {
-            return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
+
+        if (!isValidSession(session) || session.role !== 'fulladmin') {
+            return NextResponse.json({ success: false, message: 'Forbidden' }, { status: 403 });
         }
 
         const body = await req.json();
@@ -44,8 +57,8 @@ export async function POST(req: Request) {
         }
 
         // Check existing
-        const existing = await query('SELECT id FROM users WHERE username = ?', [username]);
-        if ((existing as any[]).length > 0) {
+        const existing = await query<any[]>('SELECT id FROM users WHERE username = ?', [username]);
+        if (existing.length > 0) {
             return NextResponse.json({ success: false, message: 'Username already exists' }, { status: 409 });
         }
 

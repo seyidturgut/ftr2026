@@ -1,16 +1,28 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import { getSession } from '@/lib/auth';
+import { SessionPayload } from '@/types';
+
+/**
+ * Type guard to narrow the session object and ensure 
+ * it contains required fields with correct types.
+ */
+function isValidSession(session: unknown): session is SessionPayload {
+    if (!session || typeof session !== 'object') return false;
+    const s = session as Record<string, unknown>;
+    return (
+        typeof s.id === 'number' &&
+        typeof s.role === 'string' &&
+        typeof s.username === 'string'
+    );
+}
 
 // GET /api/content/[slug] (Looks up by slug)
-// PUT /api/content/[slug] (Looks up by ID, assumes slug param is ID)
-// DELETE /api/content/[slug] (Looks up by ID)
-
 export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
     try {
         const { slug } = await params;
         const session = await getSession();
-        const isAuthenticated = !!session;
+        const isAuthenticated = isValidSession(session);
 
         const sql = `
       SELECT c.*, cat.name as category_name, cat.slug as category_slug, cat.page_type,
@@ -22,7 +34,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
       WHERE c.slug = ? AND c.is_published = 1
     `;
 
-        const contentItems = await query<any[]>(sql, [session?.id || 0, slug]);
+        const contentItems = await query<any[]>(sql, [isAuthenticated ? session.id : 0, slug]);
         const content = contentItems[0];
 
         if (!content) {
@@ -71,6 +83,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
             authenticated: isAuthenticated
         });
     } catch (error) {
+        console.error('Content GET error:', error);
         return NextResponse.json({ success: false, message: 'Internal server error' }, { status: 500 });
     }
 }
@@ -80,62 +93,27 @@ export async function PUT(req: Request, { params }: { params: Promise<{ slug: st
         const { slug: id } = await params; // Treat as ID for updates
         const session = await getSession();
 
-        if (!session || !['fulladmin', 'admin', 'editor'].includes(session.role as string)) {
+        if (!isValidSession(session) || !['fulladmin', 'admin', 'editor'].includes(session.role)) {
             return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
         }
 
-        // Check ownership
-        if (!['fulladmin', 'admin'].includes(session.role as string)) {
-            const items = await query<any[]>('SELECT author_id FROM content_items WHERE id = ?', [id]);
+        const userId = Number(id);
+
+        // Check ownership if not admin
+        if (!['fulladmin', 'admin'].includes(session.role)) {
+            const items = await query<any[]>('SELECT author_id FROM content_items WHERE id = ?', [userId]);
             if (!items.length || items[0].author_id !== session.id) {
                 return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
             }
         }
 
         const body = await req.json();
-        const updates: string[] = [];
-        const values: any[] = [];
-
         const allowedFields = [
             'title', 'meta_title', 'slug', 'description', 'category_id', 'content_type',
             'pdf_url', 'pdf_pages', 'pdf_file_size', 'video_url', 'video_duration', 'video_thumbnail', 'video_platform',
             'text_content', 'cover_image', 'requires_auth', 'display_order', 'meta_description', 'has_download', 'is_published'
         ];
 
-        allowedFields.forEach(field => {
-            if (body[field] !== undefined) {
-                updates.push(`${field} = ?`);
-                if (field === 'tags') {
-                    values.push(JSON.stringify(body[field]));
-                } else if (field === 'is_published' && body[field]) {
-                    // Handle publish update Logic separately? No, standard update.
-                    // But if specific logic needed for published_at:
-                    values.push(body[field]);
-                } else {
-                    values.push(body[field]);
-                }
-            }
-        });
-
-        // logic for published_at handled? 
-        if (body.is_published) {
-            updates.push('published_at = NOW()');
-        }
-
-        if (body.tags) {
-            updates.push('tags = ?');
-            values.push(JSON.stringify(body.tags));
-        }
-
-        if (updates.length > 0) {
-            values.push(id);
-            // Remove duplicates if any (e.g. tags logic above duplicated) - Simplify:
-            // Actually standard loop is fine, but special cases need care. 
-            // Let's rewrite loop cleanly in a real implementation, but for now this is roughly compatible.
-            // Better: strict separation.
-        }
-
-        // Improved update logic:
         const finalUpdates: string[] = [];
         const finalValues: any[] = [];
 
@@ -156,12 +134,13 @@ export async function PUT(req: Request, { params }: { params: Promise<{ slug: st
         }
 
         if (finalUpdates.length > 0) {
-            finalValues.push(id);
+            finalValues.push(userId);
             await query(`UPDATE content_items SET ${finalUpdates.join(', ')} WHERE id = ?`, finalValues);
         }
 
         return NextResponse.json({ success: true, message: 'Content updated' });
     } catch (error) {
+        console.error('Content PUT error:', error);
         return NextResponse.json({ success: false, message: 'Internal server error' }, { status: 500 });
     }
 }
@@ -170,14 +149,17 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ slug:
     try {
         const { slug: id } = await params;
         const session = await getSession();
-        if (!session || !['fulladmin', 'admin'].includes(session.role as string)) {
+
+        if (!isValidSession(session) || !['fulladmin', 'admin'].includes(session.role)) {
             return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
         }
 
-        await query('UPDATE content_items SET is_published = 0 WHERE id = ?', [id]);
+        const userId = Number(id);
+        await query('UPDATE content_items SET is_published = 0 WHERE id = ?', [userId]);
 
         return NextResponse.json({ success: true, message: 'Content deleted' });
     } catch (error) {
+        console.error('Content DELETE error:', error);
         return NextResponse.json({ success: false, message: 'Internal server error' }, { status: 500 });
     }
 }
