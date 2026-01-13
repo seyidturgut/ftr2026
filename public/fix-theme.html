@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema Sıfırlama</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .success {
+            color: #10b981;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .info {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #475569;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🌞 Light Tema Düzeltme</h1>
+        <p>Eğer ana sayfa hala dark mode'da açılıyorsa, bu butona tıklayın. Tarayıcınızın localStorage'ını temizleyip
+            light tema'yı varsayılan yapacak.</p>
+
+        <button onclick="fixTheme()">Temayı Düzelt ve Ana Sayfaya Git</button>
+
+        <div class="success" id="success">✅ Başarılı! Yönlendiriliyor...</div>
+
+        <div class="info">
+            <strong>Not:</strong> Bu sayfa localStorage'daki tema ayarını temizler ve sizi ana sayfaya yönlendirir. Ana
+            sayfa artık light tema ile açılacak.
+        </div>
+    </div>
+
+    <script>
+        function fixTheme() {
+            // Tüm tema ile ilgili localStorage öğelerini temizle
+            localStorage.removeItem('theme');
+            localStorage.removeItem('theme-storage');
+
+            // Success mesajını göster
+            document.getElementById('success').style.display = 'block';
+
+            // 1 saniye sonra ana sayfaya yönlendir
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

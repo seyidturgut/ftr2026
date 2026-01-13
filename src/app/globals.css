@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:is(.dark *));
+
+/* ==================== CLEAN THEME SYSTEM ==================== */
+/* Light theme is DEFAULT, dark theme uses .dark class */
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* ==================== TEXT SELECTION ==================== */
+::selection {
+  background-color: #0ea5e9;
+  color: #ffffff;
+}
+
+.dark ::selection {
+  background-color: #38bdf8;
+  color: #0f172a;
+}

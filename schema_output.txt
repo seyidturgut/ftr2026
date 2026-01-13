@@ -1,0 +1,60 @@
+[dotenv@17.2.3] injecting env (7) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Inspecting schema on: 160.153.246.164
+
+--- Table: content_items ---
+┌─────────┬───────────────────────┬─────────────────────────────────────┬───────┬───────┬─────────────────────┬───────────────────────────────┐
+│ (index) │ Field                 │ Type                                │ Null  │ Key   │ Default             │ Extra                         │
+├─────────┼───────────────────────┼─────────────────────────────────────┼───────┼───────┼─────────────────────┼───────────────────────────────┤
+│ 0       │ 'id'                  │ 'int(11)'                           │ 'NO'  │ 'PRI' │ null                │ 'auto_increment'              │
+│ 1       │ 'category_id'         │ 'int(11)'                           │ 'NO'  │ 'MUL' │ null                │ ''                            │
+│ 2       │ 'title'               │ 'varchar(300)'                      │ 'NO'  │ 'MUL' │ null                │ ''                            │
+│ 3       │ 'meta_title'          │ 'varchar(300)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 4       │ 'slug'                │ 'varchar(300)'                      │ 'NO'  │ 'UNI' │ null                │ ''                            │
+│ 5       │ 'description'         │ 'text'                              │ 'YES' │ ''    │ null                │ ''                            │
+│ 6       │ 'content_type'        │ "enum('pdf','video','text','pptx')" │ 'NO'  │ 'MUL' │ null                │ ''                            │
+│ 7       │ 'pdf_url'             │ 'varchar(500)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 8       │ 'reference_pdf_url'   │ 'varchar(255)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 9       │ 'reference_downloads' │ 'int(11)'                           │ 'YES' │ ''    │ '0'                 │ ''                            │
+│ 10      │ 'pptx_url'            │ 'varchar(255)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 11      │ 'pdf_pages'           │ 'int(11)'                           │ 'YES' │ ''    │ null                │ ''                            │
+│ 12      │ 'pdf_file_size'       │ 'int(11)'                           │ 'YES' │ ''    │ null                │ ''                            │
+│ 13      │ 'video_url'           │ 'varchar(500)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 14      │ 'video_duration'      │ 'int(11)'                           │ 'YES' │ ''    │ null                │ ''                            │
+│ 15      │ 'video_thumbnail'     │ 'varchar(500)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 16      │ 'video_platform'      │ 'varchar(50)'                       │ 'YES' │ ''    │ null                │ ''                            │
+│ 17      │ 'text_content'        │ 'longtext'                          │ 'YES' │ ''    │ null                │ ''                            │
+│ 18      │ 'cover_image'         │ 'varchar(500)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 19      │ 'author_id'           │ 'int(11)'                           │ 'YES' │ 'MUL' │ null                │ ''                            │
+│ 20      │ 'prepared_by'         │ 'varchar(255)'                      │ 'YES' │ ''    │ null                │ ''                            │
+│ 21      │ 'views'               │ 'int(11)'                           │ 'YES' │ ''    │ '0'                 │ ''                            │
+│ 22      │ 'downloads'           │ 'int(11)'                           │ 'YES' │ ''    │ '0'                 │ ''                            │
+│ 23      │ 'has_download'        │ 'tinyint(1)'                        │ 'YES' │ ''    │ '0'                 │ ''                            │
+│ 24      │ 'requires_auth'       │ 'tinyint(1)'                        │ 'YES' │ ''    │ '1'                 │ ''                            │
+│ 25      │ 'display_order'       │ 'int(11)'                           │ 'YES' │ ''    │ '0'                 │ ''                            │
+│ 26      │ 'tags'                │ 'json'                              │ 'YES' │ ''    │ null                │ ''                            │
+│ 27      │ 'meta_description'    │ 'text'                              │ 'YES' │ ''    │ null                │ ''                            │
+│ 28      │ 'created_at'          │ 'timestamp'                         │ 'YES' │ ''    │ 'CURRENT_TIMESTAMP' │ ''                            │
+│ 29      │ 'updated_at'          │ 'timestamp'                         │ 'YES' │ ''    │ 'CURRENT_TIMESTAMP' │ 'on update CURRENT_TIMESTAMP' │
+│ 30      │ 'published_at'        │ 'timestamp'                         │ 'YES' │ ''    │ null                │ ''                            │
+│ 31      │ 'is_published'        │ 'tinyint(1)'                        │ 'YES' │ 'MUL' │ '0'                 │ ''                            │
+│ 32      │ 'content_order'       │ 'json'                              │ 'YES' │ ''    │ null                │ ''                            │
+└─────────┴───────────────────────┴─────────────────────────────────────┴───────┴───────┴─────────────────────┴───────────────────────────────┘
+
+--- Table: content_categories ---
+┌─────────┬─────────────────┬────────────────────────────────────────┬───────┬───────┬─────────────────────┬───────────────────────────────┐
+│ (index) │ Field           │ Type                                   │ Null  │ Key   │ Default             │ Extra                         │
+├─────────┼─────────────────┼────────────────────────────────────────┼───────┼───────┼─────────────────────┼───────────────────────────────┤
+│ 0       │ 'id'            │ 'int(11)'                              │ 'NO'  │ 'PRI' │ null                │ 'auto_increment'              │
+│ 1       │ 'parent_id'     │ 'int(11)'                              │ 'YES' │ 'MUL' │ null                │ ''                            │
+│ 2       │ 'slug'          │ 'varchar(100)'                         │ 'NO'  │ 'UNI' │ null                │ ''                            │
+│ 3       │ 'name'          │ 'varchar(200)'                         │ 'NO'  │ ''    │ null                │ ''                            │
+│ 4       │ 'description'   │ 'text'                                 │ 'YES' │ ''    │ null                │ ''                            │
+│ 5       │ 'icon'          │ 'varchar(50)'                          │ 'YES' │ ''    │ null                │ ''                            │
+│ 6       │ 'display_order' │ 'int(11)'                              │ 'YES' │ 'MUL' │ '0'                 │ ''                            │
+│ 7       │ 'page_type'     │ "enum('akademik','dokuman','seminer')" │ 'NO'  │ 'MUL' │ null                │ ''                            │
+│ 8       │ 'created_by'    │ 'int(11)'                              │ 'YES' │ 'MUL' │ null                │ ''                            │
+│ 9       │ 'created_at'    │ 'timestamp'                            │ 'YES' │ ''    │ 'CURRENT_TIMESTAMP' │ ''                            │
+│ 10      │ 'updated_at'    │ 'timestamp'                            │ 'YES' │ ''    │ 'CURRENT_TIMESTAMP' │ 'on update CURRENT_TIMESTAMP' │
+│ 11      │ 'is_active'     │ 'tinyint(1)'                           │ 'YES' │ ''    │ '1'                 │ ''                            │
+│ 12      │ 'content_type'  │ 'varchar(50)'                          │ 'YES' │ ''    │ null                │ ''                            │
+└─────────┴─────────────────┴────────────────────────────────────────┴───────┴───────┴─────────────────────┴───────────────────────────────┘

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema Reset</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card {
+            background: white;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            max-width: 500px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .countdown {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1rem 0;
+        }
+
+        .success {
+            color: #10b981;
+            font-weight: 700;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🌞 Light Tema Aktifleştiriliyor</h1>
+        <p>Tarayıcı önbelleği temizleniyor ve light tema ayarlanıyor...</p>
+
+        <div class="spinner"></div>
+        <div class="countdown" id="countdown">3</div>
+
+        <div class="success" id="success" style="display: none;">✅ Tamamlandı! Yönlendiriliyor...</div>
+    </div>
+
+    <script>
+        let count = 3;
+        const countdownEl = document.getElementById('countdown');
+        const successEl = document.getElementById('success');
+
+        // localStorage ve sessionStorage temizle
+        localStorage.clear();
+        sessionStorage.clear();
+
+        // Light tema'yı ayarla
+        localStorage.setItem('ftr-theme', 'light');
+
+        // Countdown
+        const interval = setInterval(() => {
+            count--;
+            countdownEl.textContent = count;
+
+            if (count === 0) {
+                clearInterval(interval);
+                countdownEl.style.display = 'none';
+                successEl.style.display = 'block';
+
+                // Ana sayfaya yönlendir
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 500);
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
