@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -20,7 +20,7 @@ import ForumView from '@/components/ForumView';
 
 type ViewMode = 'content' | 'forum' | 'profile' | 'admin' | 'calculator' | 'rx';
 
-export default function ContentPage() {
+function ContentPageContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { isAuthenticated, user, logout } = useAuth();
@@ -78,6 +78,7 @@ export default function ContentPage() {
             setLoading(true);
             try {
                 const categoryType = activeTab === 'all' ? undefined : activeTab;
+                // Use relative path for client-side fetch to ensure build safety
                 const catRes = await fetch(`/api/content/categories${categoryType ? `?content_type=${categoryType}` : ''}`);
                 const catData = await catRes.json();
 
@@ -975,5 +976,20 @@ export default function ContentPage() {
                 </main>
             </div>
         </div>
+    );
+}
+
+export default function ContentPage() {
+    return (
+        <Suspense fallback={
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100">
+                <div className="flex flex-col items-center">
+                    <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-500 font-medium">Sayfa yükleniyor...</p>
+                </div>
+            </div>
+        }>
+            <ContentPageContent />
+        </Suspense>
     );
 }
