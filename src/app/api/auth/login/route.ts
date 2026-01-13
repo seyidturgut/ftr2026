@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { compare } from 'bcryptjs';
 import pool, { query } from '@/lib/db';
 import { signToken, setSession } from '@/lib/auth';
-import { User } from '@/types'; // We need to define types, but let's use 'any' or define interface inline for now
+import { User } from '@/types';
 
 export async function POST(req: Request) {
     try {
