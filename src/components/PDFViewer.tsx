@@ -177,7 +177,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl }) => {
                         {numPages && Array.from(new Array(numPages), (el, index) => (
                             <div
                                 key={`page_${index + 1}`}
-                                ref={el => pageRefs.current[index] = el}
+                                ref={(el) => { pageRefs.current[index] = el; }}
                                 className="shadow-2xl shadow-gray-200/80 border border-gray-200 rounded-sm overflow-hidden bg-white"
                             >
                                 <Page
