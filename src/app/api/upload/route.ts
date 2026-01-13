@@ -52,11 +52,12 @@ export async function POST(req: Request) {
 
         if (type === 'ad_image') {
             // Resize and convert to WebP
-            buffer = await sharp(buffer)
+            const processedBuffer = await sharp(buffer)
                 .resize({ width: 1200, withoutEnlargement: true }) // Max width 1200px
                 .webp({ quality: 80 }) // 80% quality WebP
                 .toBuffer();
 
+            buffer = Buffer.from(processedBuffer);
             filename = `${type}_${session.id}_${randomUUID()}.webp`;
         } else {
             // Standard handling for other types
@@ -70,8 +71,9 @@ export async function POST(req: Request) {
         const fileUrl = `/uploads/${type}s/${filename}`;
 
         if (type === 'profile') {
-            const fullUrl = `http://localhost:3000${fileUrl}`; // Store absolute? Legacy stored relative `/uploads/...`.
-            // Legacy `upload.php` stored `/uploads/...`.
+            // Use environment variable for app URL or fallback to relative
+            const appUrl = process.env.NEXT_PUBLIC_APP_URL || '';
+            const fullUrl = appUrl ? `${appUrl}${fileUrl}` : fileUrl;
             await query('UPDATE users SET profile_photo = ? WHERE id = ?', [fileUrl, session.id]);
         }
 
