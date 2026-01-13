@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
             return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
         }
 
-        const canView = session.id === Number(id) || ['fulladmin', 'admin'].includes(session.role);
+        const canView = session.id === Number(id) || ['fulladmin', 'admin'].includes(session.role as string);
         if (!canView) {
             return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
         }

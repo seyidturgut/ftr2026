@@ -7,7 +7,7 @@ import { getSession } from '@/lib/auth';
 export async function GET() {
     try {
         const session = await getSession();
-        if (!session || !['fulladmin', 'admin'].includes(session.role)) {
+        if (!session || !['fulladmin', 'admin'].includes(session.role as string)) {
             return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
         }
 

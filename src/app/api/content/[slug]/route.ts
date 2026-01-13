@@ -80,14 +80,14 @@ export async function PUT(req: Request, { params }: { params: Promise<{ slug: st
         const { slug: id } = await params; // Treat as ID for updates
         const session = await getSession();
 
-        if (!session || !['fulladmin', 'admin', 'editor'].includes((session as any).role)) {
+        if (!session || !['fulladmin', 'admin', 'editor'].includes(session.role as string)) {
             return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
         }
 
         // Check ownership
-        if (!['fulladmin', 'admin'].includes((session as any).role)) {
+        if (!['fulladmin', 'admin'].includes(session.role as string)) {
             const items = await query<any[]>('SELECT author_id FROM content_items WHERE id = ?', [id]);
-            if (!items.length || items[0].author_id !== (session as any).id) {
+            if (!items.length || items[0].author_id !== session.id) {
                 return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 403 });
             }
         }

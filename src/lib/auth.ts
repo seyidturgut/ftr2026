@@ -1,6 +1,8 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
+import { SessionPayload } from '@/types';
+
 const SECRET_KEY = process.env.JWT_SECRET || 'secret';
 const key = new TextEncoder().encode(SECRET_KEY);
 
@@ -12,18 +14,18 @@ export async function signToken(payload: any) {
         .sign(key);
 }
 
-export async function verifyToken(token: string) {
+export async function verifyToken(token: string): Promise<SessionPayload | null> {
     try {
         const { payload } = await jwtVerify(token, key, {
             algorithms: ['HS256'],
         });
-        return payload;
+        return payload as unknown as SessionPayload;
     } catch (error) {
         return null;
     }
 }
 
-export async function getSession() {
+export async function getSession(): Promise<SessionPayload | null> {
     const cookieStore = await cookies();
     const token = cookieStore.get('auth_token')?.value;
     if (!token) return null;

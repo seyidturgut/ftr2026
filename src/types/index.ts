@@ -30,3 +30,10 @@ export interface ContentItem {
     created_at: string;
     breadcrumbs?: any[];
 }
+
+export interface SessionPayload {
+    id: number;
+    username: string;
+    role: string;
+    [key: string]: any;
+}
