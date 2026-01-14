@@ -7,6 +7,11 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "FTR Online",
   description: "Fizik Tedavi ve Rehabilitasyon Portalı",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
