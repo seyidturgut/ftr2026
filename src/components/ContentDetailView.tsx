@@ -9,6 +9,7 @@ import {
 import AdBanner from './AdBanner';
 import dynamic from 'next/dynamic';
 const PDFViewer = dynamic(() => import('@/components/PDFViewer'), { ssr: false });
+const PPTXViewer = dynamic(() => import('@/components/PPTXViewer'), { ssr: false });
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
@@ -396,33 +397,11 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                                 </div>
                                 <span className='bg-orange-100 text-orange-700 px-3 py-1 rounded-lg font-black'>PPTX</span>
                             </div>
-                            <div className="aspect-video bg-slate-50 rounded-b-3xl overflow-hidden shadow-xl ring-1 ring-slate-200 flex flex-col items-center justify-center p-6 text-center relative">
-                                {typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? (
-                                    <div className="max-w-md space-y-6">
-                                        <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
-                                            <FileText size={32} />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <h4 className="text-lg font-black text-slate-900 leading-tight">Sunum Görüntüleyici</h4>
-                                            <p className="text-[13px] text-slate-500 font-medium">Yerel geliştirme ortamında Microsoft Viewer kullanılamaz. Devam etmek için sunumu indirin.</p>
-                                        </div>
-                                        <a
-                                            href={`/uploads/${content.pptx_url}`}
-                                            download
-                                            className="inline-flex items-center gap-3 px-6 py-3 bg-orange-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-orange-700 transition-all shadow-lg"
-                                        >
-                                            <Download size={16} /> Sunumu İndir
-                                        </a>
-                                    </div>
-                                ) : (
-                                    <iframe
-                                        src={`https://view.officeapps.live.com/op/view.aspx?src=${encodeURIComponent(window.location.origin + '/uploads/' + content.pptx_url)}`}
-                                        width="100%"
-                                        height="100%"
-                                        frameBorder="0"
-                                        className="absolute inset-0"
-                                    />
-                                )}
+                            <div className="rounded-b-3xl overflow-hidden border border-slate-200 shadow-xl bg-white">
+                                <PPTXViewer
+                                    fileUrl={`/uploads/${content.pptx_url}`}
+                                    onDownload={() => handleDownload('standard')}
+                                />
                             </div>
                         </div>
                     )}
