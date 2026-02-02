@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Calculator, AlertCircle, RefreshCw, Activity, TestTube } from 'lucide-react';
-import ConfirmModal from '../ui/ConfirmModal';
+
 
 interface SdaiData {
     tjc: number; // Tender Joint Count (0-28)
@@ -25,24 +25,36 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
         crp: ''
     });
 
-    // Alert Modal State
-    const [alertModal, setAlertModal] = useState<{ isOpen: boolean, message: string }>({
-        isOpen: false,
-        message: ''
-    });
+    // Error and Animation States
+    const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+    const [animateError, setAnimateError] = useState<{ [key: string]: boolean }>({});
 
     const [result, setResult] = useState<CalculationResult | null>(null);
 
+    const triggerErrorAnimation = (field: string) => {
+        setAnimateError(prev => ({ ...prev, [field]: true }));
+        setTimeout(() => {
+            setAnimateError(prev => ({ ...prev, [field]: false }));
+        }, 500);
+    };
+
     const calculateSDAI = () => {
         const crpValue = parseFloat(data.crp);
+        const newErrors: { [key: string]: boolean } = {};
+        let hasError = false;
 
         if (isNaN(crpValue) || crpValue < 0) {
-            setAlertModal({
-                isOpen: true,
-                message: 'Lütfen geçerli bir CRP değeri giriniz (mg/dL).'
-            });
+            newErrors.crp = true;
+            triggerErrorAnimation('crp');
+            hasError = true;
+        }
+
+        if (hasError) {
+            setErrors(newErrors);
             return;
         }
+
+        setErrors({});
 
         // Formula: SDAI = TJC + SJC + PaGA + EGA + CRP
         const { tjc, sjc, patientGlobal, evaluatorGlobal } = data;
@@ -86,6 +98,7 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
             crp: ''
         });
         setResult(null);
+        setErrors({});
     };
 
     const RangeInput = ({
@@ -197,10 +210,10 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
                     {/* CRP Input */}
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/2">
-                            <label className="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-                                <TestTube size={16} className="text-violet-600" />
+                            <label className={`block text-sm font-bold mb-2 flex items-center gap-2 ${errors.crp ? 'text-red-600' : 'text-gray-800'}`}>
+                                <TestTube size={16} className={errors.crp ? 'text-red-600' : 'text-violet-600'} />
                                 CRP Değeri (mg/dL)
-                                <span className="text-xs font-normal text-gray-500 ml-1">(Dikkat: mg/dL)</span>
+                                <span className={`text-xs font-normal ml-1 ${errors.crp ? 'text-red-400' : 'text-gray-500'}`}>(Dikkat: mg/dL)</span>
                             </label>
                             <input
                                 type="number"
@@ -208,8 +221,17 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
                                 step="0.01"
                                 placeholder="Örn: 0.8"
                                 value={data.crp}
-                                onChange={(e) => setData({ ...data, crp: e.target.value })}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-medium text-gray-900"
+                                onChange={(e) => {
+                                    setData({ ...data, crp: e.target.value });
+                                    if (errors.crp) setErrors({ ...errors, crp: false });
+                                }}
+                                className={`
+                                    w-full px-4 py-3 rounded-lg border outline-none transition-all font-medium text-gray-900 duration-300
+                                    ${errors.crp
+                                        ? 'border-red-500 bg-red-50 focus:ring-4 focus:ring-red-500/20 focus:border-red-600'
+                                        : 'border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500'}
+                                    ${animateError.crp ? 'scale-105 shadow-lg shadow-red-200' : ''}
+                                `}
                             />
                         </div>
                         <div className="w-full md:w-1/2 flex items-center gap-3">
@@ -232,10 +254,10 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
                 </div>
 
                 {/* Right Side: Info & Result */}
-                <div className="space-y-6">
+                <div className="space-y-6 sticky top-6 h-fit">
                     {/* Sticky Result Card */}
                     {result ? (
-                        <div className={`p-8 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl sticky top-6 ${result.colorClass}`}>
+                        <div className={`p-8 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl ${result.colorClass}`}>
                             <span className="text-xs uppercase tracking-wider font-bold opacity-70 mb-2">HESAPLANAN SDAI</span>
                             <div className="text-7xl font-black mb-3 tracking-tighter">
                                 {result.score}
@@ -245,7 +267,7 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64 sticky top-6">
+                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium text-lg">Sonuç Bekleniyor</p>
                             <p className="text-sm mt-2 max-w-[200px]">Değerleri girdikten sonra hesapla butonuna basınız.</p>
@@ -279,14 +301,7 @@ export default function SdaiCalculator({ onBack }: { onBack: () => void }) {
                 </div>
             </div>
 
-            <ConfirmModal
-                isOpen={alertModal.isOpen}
-                title="Uyarı"
-                message={alertModal.message}
-                confirmText="Tamam"
-                onConfirm={() => setAlertModal({ ...alertModal, isOpen: false })}
-                type="warning"
-            />
+
         </div>
     );
 }

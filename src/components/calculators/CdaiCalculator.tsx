@@ -193,10 +193,10 @@ export default function CdaiCalculator({ onBack }: { onBack: () => void }) {
                 </div>
 
                 {/* Right Side: Info & Result */}
-                <div className="space-y-6">
+                <div className="space-y-6 sticky top-6 h-fit">
                     {/* Sticky Result Card */}
                     {result ? (
-                        <div className={`p-8 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl sticky top-6 ${result.colorClass}`}>
+                        <div className={`p-8 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl ${result.colorClass}`}>
                             <span className="text-xs uppercase tracking-wider font-bold opacity-70 mb-2">HESAPLANAN CDAI</span>
                             <div className="text-7xl font-black mb-3 tracking-tighter">
                                 {result.score}
@@ -206,7 +206,7 @@ export default function CdaiCalculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64 sticky top-6">
+                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium text-lg">Sonuç Bekleniyor</p>
                             <p className="text-sm mt-2 max-w-[200px]">Değerleri girdikten sonra hesapla butonuna basınız.</p>

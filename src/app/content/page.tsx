@@ -494,13 +494,13 @@ function ContentPageContent() {
                             {userMenuOpen && (
                                 <div className="absolute bottom-full left-0 w-full mb-2 bg-white rounded-xl shadow-xl border border-gray-100 py-1 overflow-hidden animate-in slide-in-from-bottom-2 fade-in duration-200">
                                     <div className="p-1">
-                                        <Link
-                                            href="/profile"
-                                            className="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                                        <button
+                                            onClick={() => setViewMode('profile')}
+                                            className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors text-left"
                                         >
                                             <User size={16} className="text-gray-400" />
                                             Profilim
-                                        </Link>
+                                        </button>
                                         <button
                                             onClick={() => setViewMode('profile')}
                                             className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors text-left"
@@ -594,14 +594,16 @@ function ContentPageContent() {
                                     </div>
 
                                     <div className="p-1">
-                                        <Link
-                                            href="/content"
-                                            onClick={() => setUserMenuOpen(false)}
-                                            className="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                                        <button
+                                            onClick={() => {
+                                                setViewMode('profile');
+                                                setUserMenuOpen(false);
+                                            }}
+                                            className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors text-left"
                                         >
                                             <User size={16} className="text-gray-400" />
                                             Profil Ayarları
-                                        </Link>
+                                        </button>
 
                                         {user.role === 'fulladmin' && (
                                             <button
@@ -864,7 +866,19 @@ function ContentPageContent() {
                                                 ) : filteredContent.length > 0 ? (
                                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20">
                                                         {filteredContent.map((item) => (
-                                                            <div key={item.id} className="bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-md border border-gray-100 dark:border-slate-800 flex flex-col h-full transition-all duration-300 group relative overflow-hidden">
+                                                            <div
+                                                                key={item.id}
+                                                                onClick={() => {
+                                                                    if (!isAuthenticated) {
+                                                                        router.push('/login');
+                                                                    } else {
+                                                                        const params = new URLSearchParams(window.location.search);
+                                                                        params.set('slug', item.slug);
+                                                                        router.push(`/content?${params.toString()}`);
+                                                                    }
+                                                                }}
+                                                                className="bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-md border border-gray-100 dark:border-slate-800 flex flex-col h-full transition-all duration-300 group relative overflow-hidden cursor-pointer"
+                                                            >
                                                                 <div className={`absolute top-0 left-0 w-full h-1 z-20 ${item.content_type === 'pdf' ? 'bg-blue-500' :
                                                                     item.content_type === 'video' ? 'bg-rose-500' : 'bg-emerald-500'
                                                                     }`}></div>
@@ -943,7 +957,10 @@ function ContentPageContent() {
 
                                                                         {!isAuthenticated ? (
                                                                             <button
-                                                                                onClick={() => router.push('/login')}
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    router.push('/login');
+                                                                                }}
                                                                                 className="text-xs font-bold text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1"
                                                                             >
                                                                                 <Lock size={12} />
@@ -951,7 +968,8 @@ function ContentPageContent() {
                                                                             </button>
                                                                         ) : (
                                                                             <button
-                                                                                onClick={() => {
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation();
                                                                                     const params = new URLSearchParams(window.location.search);
                                                                                     params.set('slug', item.slug);
                                                                                     router.push(`/content?${params.toString()}`);

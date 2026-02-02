@@ -444,7 +444,7 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div className="lg:col-span-8">
                         <AdBanner position="inline" className="mb-8" categoryIds={categoryIds} />
-                        <div className="bg-white dark:bg-slate-900 p-6 md:p-10 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-xl prose prose-slate dark:prose-invert prose-sm max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-600 prose-img:rounded-2xl prose-strong:text-slate-900 dark:prose-strong:text-white">
+                        <div className="bg-white dark:bg-slate-900 px-2 py-6 md:px-4 md:py-10 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-xl prose prose-slate dark:prose-invert prose-sm max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-600 prose-img:rounded-2xl prose-strong:text-slate-900 dark:prose-strong:text-white">
                             <h3 className="text-xl font-black mb-6 text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-4 uppercase tracking-[0.2em] text-[10px] flex items-center gap-2">
                                 <div className="w-1 h-1 rounded-full bg-blue-500" />
                                 İçerik Açıklaması

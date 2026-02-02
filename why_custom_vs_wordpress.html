@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neden Özel Yazılım? - FTR Online</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --white: #ffffff;
+            --wp-color: #21759b;
+            --next-color: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 0 0 2rem 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .comparison-card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .split-view {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .side {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .side.wp {
+            background-color: #f1f5f9;
+            border-left: 4px solid #cbd5e1;
+        }
+
+        .side.custom {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary);
+        }
+
+        .side-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .wp .side-title {
+            color: #64748b;
+        }
+
+        .custom .side-title {
+            color: var(--primary);
+        }
+
+        .list-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-score {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .conclusion {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 3rem;
+            background: var(--white);
+            border-radius: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metaphor {
+            font-style: italic;
+            color: #64748b;
+            margin-top: 1rem;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 1rem;
+        }
+
+        .check {
+            color: #16a34a;
+        }
+
+        .cross {
+            color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Neden WordPress Değil?</h1>
+            <p class="subtitle">FTR Online Projesi için Teknik Karar Analizi ve Stratejik Yol Haritası</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. HIZ VE PERFORMANS -->
+        <div class="comparison-card">
+            <div class="card-header">
+                <div class="icon-box">⚡</div>
+                <div class="card-title">Hız ve Performans</div>
+            </div>
+            <p>Kullanıcıların sitede sayfalar arası geçiş yaparken hissettikleri hız ve akıcılık.</p>
+
+            <div class="split-view">
+                <div class="side wp">
+                    <div class="side-title">⛔ WordPress Yöntemi</div>
+                    <div class="list-item"><span class="cross">✕</span> Her tıklamada sayfa beyazlar ve yeniden
+                        yüklenir.</div>
+                    <div class="list-item"><span class="cross">✕</span> Gereksiz yüzlerce kod arka planda çalışır.</div>
+                    <div class="list-item"><span class="cross">✕</span> Sunucu her istekte sayfayı baştan oluşturur
+                        (Yavaş).</div>
+                </div>
+                <div class="side custom">
+                    <div class="side-title">✅ Bizim Yöntem (Next.js)</div>
+                    <div class="list-item"><span class="check">✓</span> <strong>SPA Teknolojisi:</strong> Sayfa
+                        değişmez, sadece içerik değişir. (Mobil uygulama gibi).</div>
+                    <div class="list-item"><span class="check">✓</span> Sadece gerekli kod çalışır, milisaniyeler içinde
+                        açılır.</div>
+                    <div class="list-item"><span class="check">✓</span> Sayfalar önceden hazırlanır (Static Generation).
+                    </div>
+                </div>
+            </div>
+            <div class="metaphor">
+                💡 <strong>Özet:</strong> WordPress bir "Otobüs" gibidir, güçlüdür ama dur-kalk yapar hantaldır. Bizim
+                sistemimiz bir "Yarış Arabası" gibidir, amaca özel ve aerodinamiktir.
+            </div>
+        </div>
+
+        <!-- 2. GÜVENLİK -->
+        <div class="comparison-card">
+            <div class="card-header">
+                <div class="icon-box">🛡️</div>
+                <div class="card-title">Güvenlik</div>
+            </div>
+            <p>Verilerin korunması ve hacklenme risklerine karşı dayanıklılık.</p>
+
+            <div class="split-view">
+                <div class="side wp">
+                    <div class="side-title">⛔ WordPress Yöntemi</div>
+                    <div class="list-item"><span class="cross">✕</span> Dünyada en çok hacklenen sistemdir (Popüler
+                        hedef).</div>
+                    <div class="list-item"><span class="cross">✕</span> "Eklenti" (Plugin) kültürü güvenlik açığı
+                        yaratır.</div>
+                    <div class="list-item"><span class="cross">✕</span> Veritabanı yapısı herkes tarafından bilinir.
+                    </div>
+                </div>
+                <div class="side custom">
+                    <div class="side-title">✅ Bizim Yöntem (Custom)</div>
+                    <div class="list-item"><span class="check">✓</span> <strong>Kapalı Kutu:</strong> Kod yapısını
+                        sadece biz biliriz, saldırganlar tahmin edemez.</div>
+                    <div class="list-item"><span class="check">✓</span> Eklenti kullanmayız, her satır kod tarafımızdan
+                        yazılır.</div>
+                    <div class="list-item"><span class="check">✓</span> API tabanlı çalışır, veritabanı doğrudan
+                        internete açık değildir.</div>
+                </div>
+            </div>
+            <div class="metaphor">
+                💡 <strong>Özet:</strong> WordPress "Halka Açık Bir Apartman" kapısı gibidir. Bizim sistemimiz ise "Özel
+                Güvenlikli Kasadır".
+            </div>
+        </div>
+
+        <!-- 3. VERİ YÖNETİMİ -->
+        <div class="comparison-card">
+            <div class="card-header">
+                <div class="icon-box">🗄️</div>
+                <div class="card-title">Veri ve İçerik Yönetimi</div>
+            </div>
+            <p>FTR Online gibi binlerce akademik veri içeren bir projede verinin düzeni.</p>
+
+            <div class="split-view">
+                <div class="side wp">
+                    <div class="side-title">⛔ WordPress Yöntemi</div>
+                    <div class="list-item"><span class="cross">✕</span> Her şey (Yazı, Ürün, Sayfa) aynı havuzda
+                        toplanır.</div>
+                    <div class="list-item"><span class="cross">✕</span> Akademik veri ilişkilerini kurmak çok zordur ve
+                        sistemi yavaşlatır.</div>
+                    <div class="list-item"><span class="cross">✕</span> "Spagetti" veri yapısı nedeniyle analiz yapmak
+                        zordur.</div>
+                </div>
+                <div class="side custom">
+                    <div class="side-title">✅ Bizim Yöntem (Custom DB)</div>
+                    <div class="list-item"><span class="check">✓</span> Veritabanı <strong>FTR'ye Özel</strong>
+                        tasarlandı.</div>
+                    <div class="list-item"><span class="check">✓</span> Akademik, Seminer, Video gibi türler fiziksel
+                        olarak ayrı raflardadır.</div>
+                    <div class="list-item"><span class="check">✓</span> İleri seviye raporlama ve analiz (Kim neyi
+                        indirdi?) çok kolaydır.</div>
+                </div>
+            </div>
+            <div class="metaphor">
+                💡 <strong>Özet:</strong> WordPress, her şeyin içine atıldığı "Büyük Bir Çuval"dır. Bizim sistemimiz
+                "Düzenli Bir Eczane Dolabı" gibidir.
+            </div>
+        </div>
+
+        <!-- YÖNETİM VE BAKIM -->
+        <div class="comparison-card">
+            <div class="card-header">
+                <div class="icon-box">🔧</div>
+                <div class="card-title">Sürdürülebilirlik ve Gelecek</div>
+            </div>
+            <p>Projenin büyümesi ve yeni özelliklerin eklenme kolaylığı.</p>
+
+            <div class="split-view">
+                <div class="side wp">
+                    <div class="side-title">⛔ WordPress Yöntemi</div>
+                    <div class="list-item"><span class="cross">✕</span> Bir güncelleme yapınca tüm site bozulabilir.
+                    </div>
+                    <div class="list-item"><span class="cross">✕</span> İstediğimiz özel bir özelliği eklemek için
+                        sistemi "zorlamamız" gerekir.</div>
+                    <div class="list-item"><span class="cross">✕</span> Mobil uygulama yapmak istenirse her şeyin baştan
+                        yazılması gerekir.</div>
+                </div>
+                <div class="side custom">
+                    <div class="side-title">✅ Bizim Yöntem (Modern Stack)</div>
+                    <div class="list-item"><span class="check">✓</span> Modüler yapısı sayesinde bozulmadan büyüyebilir.
+                    </div>
+                    <div class="list-item"><span class="cross">✓</span> Tamamen esnektir, hayal edilen her özellik
+                        kodlanabilir.</div>
+                    <div class="list-item"><span class="check">✓</span> <strong>Mobil Uygulama Hazır:</strong> Bu
+                        altyapı doğrudan App Store uygulamasına dönüşebilir.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <h2>Sonuç: Neden Doğru Kararı Verdik?</h2>
+            <p style="max-width: 700px; margin: 1rem auto; color: #475569;">
+                WordPress basit bloglar ve kurumsal tanıtım siteleri için harikadır. Ancak <strong>FTR Online</strong>
+                bir "web sitesi" değil, bir <strong>"Web Uygulamasıdır"</strong> (Web Application).
+                <br><br>
+                Kullanıcıların sürekli etkileşimde olduğu, veri indirdiği, hesaplama yaptığı ve abonelik yönettiği bu
+                platform için Özel Yazılım (Next.js), uzun vadede <strong>daha ucuz, daha güvenli ve kat kat daha
+                    performanslıdır.</strong>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

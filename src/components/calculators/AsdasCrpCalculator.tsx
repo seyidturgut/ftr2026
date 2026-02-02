@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Calculator, AlertCircle, RefreshCw } from 'lucide-react';
-import ConfirmModal from '../ui/ConfirmModal';
+
 
 interface AsdasData {
     backPain: number;
@@ -25,23 +25,36 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
         crp: ''
     });
 
-    const [alertModal, setAlertModal] = useState<{ isOpen: boolean, message: string }>({
-        isOpen: false,
-        message: ''
-    });
+    // Error and Animation States
+    const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+    const [animateError, setAnimateError] = useState<{ [key: string]: boolean }>({});
 
     const [result, setResult] = useState<CalculationResult | null>(null);
 
+    const triggerErrorAnimation = (field: string) => {
+        setAnimateError(prev => ({ ...prev, [field]: true }));
+        setTimeout(() => {
+            setAnimateError(prev => ({ ...prev, [field]: false }));
+        }, 500);
+    };
+
     const calculateASDAS = () => {
         const crpValue = parseFloat(data.crp);
+        const newErrors: { [key: string]: boolean } = {};
+        let hasError = false;
 
         if (isNaN(crpValue) || crpValue < 0) {
-            setAlertModal({
-                isOpen: true,
-                message: 'Lütfen geçerli bir CRP değeri giriniz (>= 0).'
-            });
+            newErrors.crp = true;
+            triggerErrorAnimation('crp');
+            hasError = true;
+        }
+
+        if (hasError) {
+            setErrors(newErrors);
             return;
         }
+
+        setErrors({});
 
         // Formula: 0.121*Back + 0.058*Stiffness + 0.110*Global + 0.073*Peripheral + 0.579*ln(CRP+1)
         const score = (
@@ -85,6 +98,7 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
             crp: ''
         });
         setResult(null);
+        setErrors({});
     };
 
     const RangeInput = ({
@@ -179,8 +193,8 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
 
                     <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/2">
-                            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                                CRP Değeri (mg/L)
+                            <label className={`block text-sm font-medium mb-2 ${errors.crp ? 'text-red-500' : 'text-gray-700 dark:text-slate-300'}`}>
+                                CRP Değeri (mg/L) {errors.crp && <span className="text-xs text-red-500 ml-1">(Lütfen geçerli değer giriniz)</span>}
                             </label>
                             <input
                                 type="number"
@@ -188,8 +202,17 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
                                 step="0.1"
                                 placeholder="Örn: 5.2"
                                 value={data.crp}
-                                onChange={(e) => setData({ ...data, crp: e.target.value })}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:focus:border-blue-400 outline-none transition-all font-medium text-gray-900 dark:text-white"
+                                onChange={(e) => {
+                                    setData({ ...data, crp: e.target.value });
+                                    if (errors.crp) setErrors({ ...errors, crp: false });
+                                }}
+                                className={`
+                                    w-full px-4 py-3 rounded-lg border outline-none transition-all font-medium text-gray-900 dark:text-white
+                                    ${errors.crp
+                                        ? 'border-red-500 bg-red-50 dark:bg-red-900/10 focus:ring-4 focus:ring-red-500/20 focus:border-red-600'
+                                        : 'border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:focus:border-blue-400'}
+                                    ${animateError.crp ? 'scale-105 shadow-lg shadow-red-200' : ''}
+                                `}
                             />
                         </div>
                         <div className="w-full md:w-1/2 flex items-center gap-3">
@@ -212,10 +235,10 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
                 </div>
 
                 {/* Right Side: Info & Result */}
-                <div className="space-y-6">
+                <div className="space-y-6 sticky top-4 h-fit">
                     {/* Sticky Result Card */}
                     {result ? (
-                        <div className={`p-6 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl sticky top-4 ${result.colorClass}`}>
+                        <div className={`p-6 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl ${result.colorClass}`}>
                             <span className="text-xs uppercase tracking-wider font-bold opacity-70 mb-2">HESAPLANAN SKOR</span>
                             <div className="text-7xl font-black mb-3 tracking-tighter">
                                 {result.score}
@@ -259,14 +282,6 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
 
             </div>
 
-            <ConfirmModal
-                isOpen={alertModal.isOpen}
-                title="Eksik Bilgi"
-                message={alertModal.message}
-                confirmText="Tamam"
-                onConfirm={() => setAlertModal({ ...alertModal, isOpen: false })}
-                type="warning"
-            />
         </div>
     );
 }

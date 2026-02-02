@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Calculator, AlertCircle, RefreshCw, Activity, TestTube, ArrowRightLeft } from 'lucide-react';
-import ConfirmModal from '../ui/ConfirmModal';
+
 
 interface Das28Data {
     tjc: number; // Tender Joint Count (0-28)
@@ -28,47 +28,60 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
         crp: ''
     });
 
-    const [alertModal, setAlertModal] = useState<{ isOpen: boolean, message: string }>({
-        isOpen: false,
-        message: ''
-    });
+    // Error and Animation States
+    const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+    const [animateError, setAnimateError] = useState<{ [key: string]: boolean }>({});
 
     const [result, setResult] = useState<CalculationResult | null>(null);
+
+    const triggerErrorAnimation = (field: string) => {
+        setAnimateError(prev => ({ ...prev, [field]: true }));
+        setTimeout(() => {
+            setAnimateError(prev => ({ ...prev, [field]: false }));
+        }, 500);
+    };
 
     const calculateDAS28 = () => {
         const { tjc, sjc, patientGlobal } = data;
         let score = 0;
+        const newErrors: { [key: string]: boolean } = {};
+        let hasError = false;
 
         if (mode === 'ESR') {
             const esrValue = parseFloat(data.esr);
             if (isNaN(esrValue) || esrValue < 0) {
-                setAlertModal({
-                    isOpen: true,
-                    message: 'Lütfen geçerli bir ESR değeri giriniz.'
-                });
-                return;
+                newErrors.lab = true;
+                triggerErrorAnimation('lab');
+                hasError = true;
+            } else {
+                // Formula: 0.56 * sqrt(TJC) + 0.28 * sqrt(SJC) + 0.70 * ln(ESR) + 0.014 * GH
+                score = (0.56 * Math.sqrt(tjc)) +
+                    (0.28 * Math.sqrt(sjc)) +
+                    (0.70 * Math.log(esrValue)) +
+                    (0.014 * patientGlobal);
             }
-            // Formula: 0.56 * sqrt(TJC) + 0.28 * sqrt(SJC) + 0.70 * ln(ESR) + 0.014 * GH
-            score = (0.56 * Math.sqrt(tjc)) +
-                (0.28 * Math.sqrt(sjc)) +
-                (0.70 * Math.log(esrValue)) +
-                (0.014 * patientGlobal);
         } else {
             const crpValue = parseFloat(data.crp);
             if (isNaN(crpValue) || crpValue < 0) {
-                setAlertModal({
-                    isOpen: true,
-                    message: 'Lütfen geçerli bir CRP değeri giriniz (mg/L).'
-                });
-                return;
+                newErrors.lab = true;
+                triggerErrorAnimation('lab');
+                hasError = true;
+            } else {
+                // Formula: 0.56 * sqrt(TJC) + 0.28 * sqrt(SJC) + 0.36 * ln(CRP + 1) + 0.014 * GH + 0.96
+                score = (0.56 * Math.sqrt(tjc)) +
+                    (0.28 * Math.sqrt(sjc)) +
+                    (0.36 * Math.log(crpValue + 1)) +
+                    (0.014 * patientGlobal) +
+                    0.96;
             }
-            // Formula: 0.56 * sqrt(TJC) + 0.28 * sqrt(SJC) + 0.36 * ln(CRP + 1) + 0.014 * GH + 0.96
-            score = (0.56 * Math.sqrt(tjc)) +
-                (0.28 * Math.sqrt(sjc)) +
-                (0.36 * Math.log(crpValue + 1)) +
-                (0.014 * patientGlobal) +
-                0.96;
         }
+
+        if (hasError) {
+            setErrors(newErrors);
+            return;
+        }
+
+        setErrors({});
 
         let activityLevel = '';
         let colorClass = '';
@@ -108,6 +121,7 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
             crp: ''
         });
         setResult(null);
+        setErrors({});
     };
 
     const RangeInput = ({
@@ -226,8 +240,8 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
 
                         {/* Lab Input Card */}
                         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm h-full flex flex-col justify-center">
-                            <label className="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
-                                <TestTube size={16} className="text-purple-600" />
+                            <label className={`block text-sm font-bold mb-2 flex items-center gap-2 ${errors.lab ? 'text-red-600' : 'text-gray-800'}`}>
+                                <TestTube size={16} className={errors.lab ? 'text-red-600' : 'text-purple-600'} />
                                 {mode === 'ESR' ? 'ESR Değeri (mm/h)' : 'CRP (mg/L)'}
                             </label>
                             <input
@@ -236,10 +250,19 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
                                 step={mode === 'CRP' ? '0.01' : '1'}
                                 placeholder={mode === 'ESR' ? 'Örn: 20' : 'Örn: 5'}
                                 value={mode === 'ESR' ? data.esr : data.crp}
-                                onChange={(e) => mode === 'ESR' ? setData({ ...data, esr: e.target.value }) : setData({ ...data, crp: e.target.value })}
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-medium text-gray-900"
+                                onChange={(e) => {
+                                    mode === 'ESR' ? setData({ ...data, esr: e.target.value }) : setData({ ...data, crp: e.target.value });
+                                    if (errors.lab) setErrors({ ...errors, lab: false });
+                                }}
+                                className={`
+                                    w-full px-4 py-3 rounded-lg border outline-none transition-all font-medium text-gray-900 duration-300
+                                    ${errors.lab
+                                        ? 'border-red-500 bg-red-50 focus:ring-4 focus:ring-red-500/20 focus:border-red-600'
+                                        : 'border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500'}
+                                    ${animateError.lab ? 'scale-105 shadow-lg shadow-red-200' : ''}
+                                `}
                             />
-                            <p className="text-xs text-gray-400 mt-2">
+                            <p className={`text-xs mt-2 ${errors.lab ? 'text-red-400' : 'text-gray-400'}`}>
                                 {mode === 'ESR' ? 'Sedimantasyon hızı' : 'C-Reaktif Protein (mg/L)'}
                             </p>
                         </div>
@@ -265,10 +288,10 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
                 </div>
 
                 {/* Right Side: Info & Result */}
-                <div className="space-y-6">
+                <div className="space-y-6 sticky top-6 h-fit">
                     {/* Sticky Result Card */}
                     {result ? (
-                        <div className={`p-8 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl sticky top-6 ${result.colorClass}`}>
+                        <div className={`p-8 rounded-3xl border-2 flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 shadow-xl ${result.colorClass}`}>
                             <span className="text-xs uppercase tracking-wider font-bold opacity-70 mb-2">HESAPLANAN DAS28-{mode}</span>
                             <div className="text-7xl font-black mb-3 tracking-tighter">
                                 {result.score}
@@ -278,7 +301,7 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64 sticky top-6">
+                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium text-lg">Sonuç Bekleniyor</p>
                             <p className="text-sm mt-2 max-w-[200px]">Değerleri girdikten sonra hesapla butonuna basınız.</p>
@@ -311,15 +334,6 @@ export default function Das28Calculator({ onBack }: { onBack: () => void }) {
                     </div>
                 </div>
             </div>
-
-            <ConfirmModal
-                isOpen={alertModal.isOpen}
-                title="Eksik Bilgi"
-                message={alertModal.message}
-                confirmText="Tamam"
-                onConfirm={() => setAlertModal({ ...alertModal, isOpen: false })}
-                type="warning"
-            />
         </div>
     );
 }
