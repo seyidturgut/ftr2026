@@ -434,7 +434,7 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                             <img
                                 src={`/uploads/${content.cover_image}`}
                                 alt={content.title}
-                                className="w-full h-auto object-cover max-h-[500px]"
+                                className="w-full h-auto object-cover max-h-72"
                             />
                         </div>
                     )}

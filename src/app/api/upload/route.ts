@@ -50,11 +50,14 @@ export async function POST(req: Request) {
         // Optimization Logic
         let filename: string;
 
-        if (type === 'ad_image') {
-            // Resize and convert to WebP
+        if (type === 'ad_image' || type === 'content_cover') {
+            // Resize and convert to WebP with high quality
             const processedBuffer = await sharp(buffer)
-                .resize({ width: 1200, withoutEnlargement: true }) // Max width 1200px
-                .webp({ quality: 80 }) // 80% quality WebP
+                .resize({
+                    width: type === 'content_cover' ? 1920 : 1200, // Higher res for covers
+                    withoutEnlargement: true
+                })
+                .webp({ quality: 90 }) // 90% quality for better details
                 .toBuffer();
 
             buffer = Buffer.from(processedBuffer);
