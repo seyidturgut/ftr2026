@@ -93,33 +93,33 @@ export default function AnalyticsDashboard() {
         <div className="space-y-8">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-2xl border border-blue-100 shadow-sm flex items-center gap-4">
-                    <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-blue-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl">
                         <Download size={24} />
                     </div>
                     <div>
-                        <p className="text-sm text-slate-500 font-medium">Bugünkü İndirmeler</p>
-                        <h3 className="text-2xl font-black text-slate-900">{stats?.today || 0}</h3>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Bugünkü İndirmeler</p>
+                        <h3 className="text-2xl font-black text-slate-900 dark:text-white">{stats?.today || 0}</h3>
                     </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm flex items-center gap-4">
-                    <div className="p-3 bg-purple-50 text-purple-600 rounded-xl">
+                <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-purple-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                    <div className="p-3 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-xl">
                         <Calendar size={24} />
                     </div>
                     <div>
-                        <p className="text-sm text-slate-500 font-medium">Bu Ayki İndirmeler</p>
-                        <h3 className="text-2xl font-black text-slate-900">{stats?.month || 0}</h3>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Bu Ayki İndirmeler</p>
+                        <h3 className="text-2xl font-black text-slate-900 dark:text-white">{stats?.month || 0}</h3>
                     </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-4">
-                    <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-emerald-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
+                    <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-xl">
                         <BarChart3 size={24} />
                     </div>
                     <div>
-                        <p className="text-sm text-slate-500 font-medium">Popüler İçerik</p>
-                        <h3 className="text-sm font-bold text-slate-900 truncate max-w-[150px]">
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Popüler İçerik</p>
+                        <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[150px]">
                             {stats?.topContent?.[0]?.title || '-'}
                         </h3>
                     </div>
@@ -127,9 +127,9 @@ export default function AnalyticsDashboard() {
             </div>
 
             {/* Logs Section */}
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <FileText className="text-slate-400" size={20} />
                         İndirme Kayıtları
                     </h3>
@@ -142,19 +142,19 @@ export default function AnalyticsDashboard() {
                                 placeholder="Ara (Kullanıcı, İçerik, IP)..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none w-64"
+                                className="pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none w-64 dark:text-white dark:placeholder:text-slate-500"
                             />
                         </form>
                         <button
                             onClick={fetchData}
-                            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
                             title="Yenile"
                         >
                             <RefreshCw size={18} />
                         </button>
                         <button
                             onClick={exportToCSV}
-                            className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
                         >
                             <Download size={16} />
                             Excel/CSV İndir
@@ -164,7 +164,7 @@ export default function AnalyticsDashboard() {
 
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-slate-50 border-b border-slate-100 font-bold text-slate-700">
+                        <thead className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 font-bold text-slate-700 dark:text-slate-300">
                             <tr>
                                 <th className="px-6 py-4">Tarih</th>
                                 <th className="px-6 py-4">Kullanıcı</th>
@@ -172,38 +172,38 @@ export default function AnalyticsDashboard() {
                                 <th className="px-6 py-4">IP Adresi</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-50">
+                        <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
                             {loading ? (
                                 [1, 2, 3].map(i => (
                                     <tr key={i} className="animate-pulse">
-                                        <td colSpan={4} className="px-6 py-4 h-12 bg-slate-50/50"></td>
+                                        <td colSpan={4} className="px-6 py-4 h-12 bg-slate-50/50 dark:bg-slate-800/50"></td>
                                     </tr>
                                 ))
                             ) : logs.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-6 py-12 text-center text-slate-500">Kayıt bulunamadı.</td>
+                                    <td colSpan={4} className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">Kayıt bulunamadı.</td>
                                 </tr>
                             ) : (
                                 logs.map((log) => (
-                                    <tr key={log.id} className="hover:bg-slate-50/50 transition-colors">
-                                        <td className="px-6 py-4 text-slate-500 font-medium">
+                                    <tr key={log.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                                        <td className="px-6 py-4 text-slate-500 dark:text-slate-400 font-medium">
                                             {new Date(log.downloaded_at).toLocaleString('tr-TR')}
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2">
-                                                <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">
+                                                <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs">
                                                     {log.first_name?.[0] || '?'}{log.last_name?.[0] || '?'}
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-slate-900">{log.first_name || 'İsimsiz'} {log.last_name || 'Kullanıcı'}</div>
+                                                    <div className="font-bold text-slate-900 dark:text-white">{log.first_name || 'İsimsiz'} {log.last_name || 'Kullanıcı'}</div>
                                                     <div className="text-xs text-slate-400">@{log.username}</div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 font-medium text-slate-700">
+                                        <td className="px-6 py-4 font-medium text-slate-700 dark:text-slate-300">
                                             {log.content_title}
                                         </td>
-                                        <td className="px-6 py-4 text-slate-500 font-mono text-xs">
+                                        <td className="px-6 py-4 text-slate-500 dark:text-slate-400 font-mono text-xs">
                                             <div className="flex items-center gap-2">
                                                 <Globe size={12} />
                                                 {log.ip_address}

@@ -154,14 +154,14 @@ const CategoryManagement: React.FC = () => {
             {/* Header Actions */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-xl font-bold text-gray-900">Kategori Yönetimi</h2>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Kategori Yönetimi</h2>
                     <nav className="flex items-center gap-2 mt-1 text-sm overflow-x-auto pb-1 no-scrollbar">
                         {history.map((h, idx) => (
                             <React.Fragment key={idx}>
-                                {idx > 0 && <ChevronRight size={14} className="text-gray-400 shrink-0" />}
+                                {idx > 0 && <ChevronRight size={14} className="text-gray-400 dark:text-slate-500 shrink-0" />}
                                 <button
                                     onClick={() => navigateTo(h.id, h.name)}
-                                    className={`whitespace-nowrap hover:text-blue-600 transition-colors ${idx === history.length - 1 ? 'text-gray-900 font-bold' : 'text-gray-500'}`}
+                                    className={`whitespace-nowrap hover:text-blue-600 dark:hover:text-blue-400 transition-colors ${idx === history.length - 1 ? 'text-gray-900 dark:text-white font-bold' : 'text-gray-500 dark:text-slate-400'}`}
                                 >
                                     {h.name}
                                 </button>
@@ -182,38 +182,38 @@ const CategoryManagement: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {loading ? (
                     [1, 2, 3].map(i => (
-                        <div key={i} className="h-40 bg-gray-100 rounded-2xl border border-gray-100 animate-pulse"></div>
+                        <div key={i} className="h-40 bg-gray-100 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800 animate-pulse"></div>
                     ))
                 ) : categories.length === 0 ? (
-                    <div className="col-span-full py-20 text-center text-gray-500 bg-white rounded-2xl border border-dashed border-gray-200 flex flex-col items-center gap-4">
-                        <div className="p-4 bg-gray-50 rounded-full">
-                            <Layers size={48} className="text-gray-300" />
+                    <div className="col-span-full py-20 text-center text-gray-500 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-gray-200 dark:border-slate-800 flex flex-col items-center gap-4">
+                        <div className="p-4 bg-gray-50 dark:bg-slate-800 rounded-full">
+                            <Layers size={48} className="text-gray-300 dark:text-slate-600" />
                         </div>
                         <div className="space-y-1">
-                            <p className="font-bold text-gray-900">Henüz Kategori Bulunamadı</p>
+                            <p className="font-bold text-gray-900 dark:text-white">Henüz Kategori Bulunamadı</p>
                             <p className="text-sm">Bu seviyede gösterilecek bir içerik kategorisi yok.</p>
                         </div>
                         <button
                             onClick={() => handleOpenModal()}
-                            className="px-6 py-2 bg-blue-50 text-blue-600 text-sm font-bold rounded-xl hover:bg-blue-600 hover:text-white transition-all"
+                            className="px-6 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-bold rounded-xl hover:bg-blue-600 hover:text-white transition-all"
                         >
                             İlk Kategoriyi Oluşturun
                         </button>
                     </div>
                 ) : (
                     categories.map((cat) => (
-                        <div key={cat.id} className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden flex flex-col">
+                        <div key={cat.id} className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden flex flex-col">
                             <div className="flex items-start justify-between relative z-10 mb-4">
                                 <div
                                     className="flex items-center gap-3 cursor-pointer group/title"
                                     onClick={() => navigateTo(cat.id, cat.name)}
                                 >
-                                    <div className="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover/title:bg-blue-600 group-hover/title:text-white transition-all shadow-sm">
+                                    <div className="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl group-hover/title:bg-blue-600 dark:group-hover/title:bg-blue-500 group-hover/title:text-white transition-all shadow-sm">
                                         <Tag size={20} />
                                     </div>
                                     <div>
-                                        <div className="font-bold text-gray-900 group-hover/title:text-blue-600 transition-colors line-clamp-1">{cat.name}</div>
-                                        <div className="text-gray-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5">
+                                        <div className="font-bold text-gray-900 dark:text-white group-hover/title:text-blue-600 dark:group-hover/title:text-blue-400 transition-colors line-clamp-1">{cat.name}</div>
+                                        <div className="text-gray-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5">
                                             <Layers size={12} className="text-blue-400" /> {cat.content_type}
                                         </div>
                                     </div>
@@ -221,33 +221,33 @@ const CategoryManagement: React.FC = () => {
                                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <button
                                         onClick={(e) => { e.stopPropagation(); handleOpenModal(cat); }}
-                                        className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                                        className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-xl transition-all"
                                     >
                                         <Edit2 size={16} />
                                     </button>
                                     <button
                                         onClick={(e) => { e.stopPropagation(); handleDelete(cat.id); }}
-                                        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                                        className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition-all"
                                     >
                                         <Trash2 size={16} />
                                     </button>
                                 </div>
                             </div>
 
-                            <div className="mt-auto grid grid-cols-2 gap-4 pt-4 border-t border-gray-50">
-                                <div className="bg-gray-50/50 p-2.5 rounded-xl">
-                                    <span className="block text-[10px] text-gray-400 uppercase font-black tracking-tighter mb-0.5">İçerikler</span>
-                                    <span className="text-lg font-black text-gray-900">{cat.content_count || 0}</span>
+                            <div className="mt-auto grid grid-cols-2 gap-4 pt-4 border-t border-gray-50 dark:border-slate-800">
+                                <div className="bg-gray-50/50 dark:bg-slate-800/50 p-2.5 rounded-xl">
+                                    <span className="block text-[10px] text-gray-400 dark:text-slate-500 uppercase font-black tracking-tighter mb-0.5">İçerikler</span>
+                                    <span className="text-lg font-black text-gray-900 dark:text-white">{cat.content_count || 0}</span>
                                 </div>
-                                <div className="bg-blue-50/30 p-2.5 rounded-xl text-right">
+                                <div className="bg-blue-50/30 dark:bg-blue-900/10 p-2.5 rounded-xl text-right">
                                     <span className="block text-[10px] text-blue-400 uppercase font-black tracking-tighter mb-0.5">Alt Kategoriler</span>
-                                    <span className="text-lg font-black text-blue-600">{cat.subcategory_count || 0}</span>
+                                    <span className="text-lg font-black text-blue-600 dark:text-blue-400">{cat.subcategory_count || 0}</span>
                                 </div>
                             </div>
 
                             <button
                                 onClick={() => navigateTo(cat.id, cat.name)}
-                                className="mt-4 w-full py-2.5 bg-gray-50 hover:bg-blue-600 text-gray-600 hover:text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 group/btn"
+                                className="mt-4 w-full py-2.5 bg-gray-50 dark:bg-slate-800 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-600 dark:text-slate-300 hover:text-white dark:hover:text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 group/btn"
                             >
                                 <ChevronRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
                                 Detayları ve Alt Kategorileri Gör
@@ -260,22 +260,22 @@ const CategoryManagement: React.FC = () => {
             {/* Add/Edit Modal */}
             {isModalOpen && editingCategory && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-300">
-                    <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
-                        <div className="px-8 py-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
+                    <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+                        <div className="px-8 py-6 border-b border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/50 flex items-center justify-between">
                             <div>
-                                <h2 className="font-black text-gray-900 text-lg">
+                                <h2 className="font-black text-gray-900 dark:text-white text-lg">
                                     {editingCategory.id ? 'Kategoriyi Düzenle' : 'Yeni Kategori Ekle'}
                                 </h2>
-                                <p className="text-xs text-gray-500 font-medium">Bölüm: {history[history.length - 1].name}</p>
+                                <p className="text-xs text-gray-500 dark:text-slate-400 font-medium">Bölüm: {history[history.length - 1].name}</p>
                             </div>
-                            <button onClick={() => setIsModalOpen(false)} className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all">
+                            <button onClick={() => setIsModalOpen(false)} className="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition-all">
                                 <X size={24} />
                             </button>
                         </div>
 
                         <form onSubmit={handleSave} className="p-8 space-y-5">
                             {error && (
-                                <div className="p-4 bg-red-50 text-red-700 rounded-2xl flex items-center gap-3 animate-in fade-in zoom-in-95 duration-200 border border-red-100">
+                                <div className="p-4 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 rounded-2xl flex items-center gap-3 animate-in fade-in zoom-in-95 duration-200 border border-red-100 dark:border-red-900/30">
                                     <AlertCircle size={20} className="shrink-0" />
                                     <span className="text-sm font-bold leading-tight">{error}</span>
                                 </div>
@@ -294,7 +294,7 @@ const CategoryManagement: React.FC = () => {
                                             slug: editingCategory.id ? editingCategory.slug : slugify(name)
                                         });
                                     }}
-                                    className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-300"
+                                    className="w-full px-5 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-300 dark:placeholder:text-slate-600 dark:text-white"
                                     placeholder="Örn: Kardiyovasküler Rehabilitasyon"
                                     required
                                 />
@@ -305,7 +305,7 @@ const CategoryManagement: React.FC = () => {
                                     type="text"
                                     value={editingCategory.slug || ''}
                                     onChange={(e) => setEditingCategory({ ...editingCategory, slug: e.target.value })}
-                                    className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-300"
+                                    className="w-full px-5 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-300 dark:placeholder:text-slate-600 dark:text-white"
                                     placeholder="Örn: kardiyovaskuler-rehabilitasyon"
                                     required
                                 />
@@ -316,7 +316,7 @@ const CategoryManagement: React.FC = () => {
                                 <select
                                     value={editingCategory.content_type || 'akademik'}
                                     onChange={(e) => setEditingCategory({ ...editingCategory, content_type: e.target.value })}
-                                    className="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer"
+                                    className="w-full px-5 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer dark:text-white"
                                 >
                                     <option value="akademik">Akademik</option>
                                     <option value="dokuman">Doküman</option>
@@ -328,7 +328,7 @@ const CategoryManagement: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-8 py-3 text-sm font-black text-gray-400 hover:text-gray-900 transition-colors"
+                                    className="px-8 py-3 text-sm font-black text-gray-400 dark:text-slate-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                                 >
                                     Vazgeç
                                 </button>

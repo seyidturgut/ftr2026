@@ -153,7 +153,7 @@ const UserManagement: React.FC = () => {
                         placeholder="Kullanıcı ara (ad, kullanıcı adı, e-posta)..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                        className="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white"
                     />
                 </div>
                 <button
@@ -179,10 +179,10 @@ const UserManagement: React.FC = () => {
             </div>
 
             {/* Users Table */}
-            <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-gray-50 border-b border-gray-100 font-bold text-gray-700">
+                        <thead className="bg-gray-50 dark:bg-slate-800 border-b border-gray-100 dark:border-slate-800 font-bold text-gray-700 dark:text-slate-300">
                             <tr>
                                 <th className="px-6 py-4">Kullanıcı</th>
                                 <th className="px-6 py-4">İletişim</th>
@@ -191,7 +191,7 @@ const UserManagement: React.FC = () => {
                                 <th className="px-6 py-4 text-right">İşlemler</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-50">
+                        <tbody className="divide-y divide-gray-50 dark:divide-slate-800">
                             {loading ? (
                                 [1, 2, 3].map(i => (
                                     <tr key={i} className="animate-pulse">
@@ -204,43 +204,43 @@ const UserManagement: React.FC = () => {
                                 </tr>
                             ) : (
                                 filteredUsers.map((user) => (
-                                    <tr key={user.id} className="hover:bg-gray-50/50 transition-colors">
+                                    <tr key={user.id} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/50 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                                                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 flex items-center justify-center font-bold">
                                                     {user.first_name?.[0]}{user.last_name?.[0]}
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-gray-900">{user.first_name} {user.last_name}</div>
-                                                    <div className="text-gray-500 text-xs">@{user.username}</div>
+                                                    <div className="font-bold text-gray-900 dark:text-white">{user.first_name} {user.last_name}</div>
+                                                    <div className="text-gray-500 dark:text-slate-400 text-xs">@{user.username}</div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-600">
+                                        <td className="px-6 py-4 text-gray-600 dark:text-slate-400">
                                             <div className="flex items-center gap-1.5"><Mail size={14} /> {user.email}</div>
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className={`px-2.5 py-1 rounded-full text-xs font-bold capitalize
-                                                ${user.role === 'fulladmin' ? 'bg-purple-100 text-purple-700' :
-                                                    user.role === 'admin' ? 'bg-blue-100 text-blue-700' :
-                                                        (user.role === 'editor' || user.role === 'viewer') ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-700'}`}>
+                                                ${user.role === 'fulladmin' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' :
+                                                    user.role === 'admin' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
+                                                        (user.role === 'editor' || user.role === 'viewer') ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : 'bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300'}`}>
                                                 {(user.role === 'editor' || user.role === 'viewer') ? 'Abone' : user.role}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-500">
+                                        <td className="px-6 py-4 text-gray-500 dark:text-slate-400">
                                             <div className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(user.created_at).toLocaleDateString()}</div>
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => handleEdit(user)}
-                                                    className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+                                                    className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-all"
                                                 >
                                                     <Edit2 size={16} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(user.id)}
-                                                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                                                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-all"
                                                 >
                                                     <Trash2 size={16} />
                                                 </button>
@@ -257,9 +257,9 @@ const UserManagement: React.FC = () => {
             {/* User Edit/Create Modal */}
             {showModal && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl animate-in fade-in zoom-in-95">
-                        <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                            <h3 className="text-lg font-bold text-gray-900">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-lg shadow-2xl animate-in fade-in zoom-in-95">
+                        <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between">
+                            <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                                 {editingUser ? 'Kullanıcıyı Düzenle' : 'Yeni Kullanıcı Oluştur'}
                             </h3>
                             <button
@@ -272,48 +272,48 @@ const UserManagement: React.FC = () => {
                         <form onSubmit={handleSubmit} className="p-6 space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Ad</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Ad</label>
                                     <input
                                         type="text"
                                         required
                                         value={formData.first_name}
                                         onChange={e => setFormData({ ...formData, first_name: e.target.value })}
-                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Soyad</label>
                                     <input
                                         type="text"
                                         required
                                         value={formData.last_name}
                                         onChange={e => setFormData({ ...formData, last_name: e.target.value })}
-                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">E-posta</label>
                                 <input
                                     type="email"
                                     required
                                     value={formData.email}
                                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Kullanıcı Adı</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Kullanıcı Adı</label>
                                 <input
                                     type="text"
                                     required
                                     value={formData.username}
                                     onChange={e => setFormData({ ...formData, username: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                                     {editingUser ? 'Şifre (Değiştirmek istemiyorsanız boş bırakın)' : 'Şifre'}
                                 </label>
                                 <input
@@ -321,16 +321,16 @@ const UserManagement: React.FC = () => {
                                     required={!editingUser}
                                     value={formData.password}
                                     onChange={e => setFormData({ ...formData, password: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                     placeholder={editingUser ? '••••••••' : ''}
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Rol</label>
                                 <select
                                     value={formData.role}
                                     onChange={e => setFormData({ ...formData, role: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                    className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                 >
                                     <option value="editor">Abone</option>
                                     <option value="admin">Admin</option>
@@ -340,24 +340,24 @@ const UserManagement: React.FC = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Günlük İndirme Limiti</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Günlük İndirme Limiti</label>
                                     <input
                                         type="number"
                                         min="0"
                                         value={formData.daily_limit}
                                         onChange={e => setFormData({ ...formData, daily_limit: parseInt(e.target.value) })}
-                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                     />
                                     <span className="text-xs text-slate-400">Varsayılan: 5</span>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Aylık İndirme Limiti</label>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Aylık İndirme Limiti</label>
                                     <input
                                         type="number"
                                         min="0"
                                         value={formData.monthly_limit}
                                         onChange={e => setFormData({ ...formData, monthly_limit: parseInt(e.target.value) })}
-                                        className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                                        className="w-full px-3 py-2 border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none dark:text-white"
                                     />
                                     <span className="text-xs text-slate-400">Varsayılan: 100</span>
                                 </div>
@@ -367,7 +367,7 @@ const UserManagement: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={() => setShowModal(false)}
-                                    className="flex-1 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                                    className="flex-1 py-2 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
                                 >
                                     İptal
                                 </button>

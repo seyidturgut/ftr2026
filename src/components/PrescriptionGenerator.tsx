@@ -280,15 +280,15 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
     if (!isAuthenticated) {
         return (
             <div className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 text-center relative overflow-hidden">
+                <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-slate-800 text-center relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-purple-600"></div>
-                    <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-20 h-20 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Lock size={40} />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
                         Reçeteci İçin Giriş Yapmalısınız
                     </h2>
-                    <p className="text-gray-500 max-w-lg mx-auto mb-8 text-lg">
+                    <p className="text-gray-500 dark:text-slate-400 max-w-lg mx-auto mb-8 text-lg">
                         Profesyonel reçete oluşturucu modülünü kullanmak, ürünleri listelemek ve çıktı almak için lütfen üye girişi yapınız.
                     </p>
                     <Link
@@ -320,10 +320,10 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
     }
 
     return (
-        <div className="flex flex-col h-[calc(100vh-80px)] overflow-hidden bg-gray-50 border-t border-gray-200">
+        <div className="flex flex-col h-[calc(100vh-80px)] overflow-hidden bg-gray-50 dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800">
             {/* Breadcrumbs */}
-            <div className="bg-white border-b border-gray-200 px-4 md:px-8 py-3 shrink-0">
-                <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
+            <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 px-4 md:px-8 py-3 shrink-0">
+                <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
                     <button
                         onClick={() => onBack()}
                         className="hover:text-blue-600 transition-colors"
@@ -331,14 +331,14 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                         <Home size={12} />
                     </button>
                     <ChevronRight size={10} className="shrink-0 opacity-30" />
-                    <span className="text-blue-600">Reçeteci</span>
+                    <span className="text-blue-600 dark:text-blue-400">Reçeteci</span>
                 </nav>
             </div>
 
             <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
 
                 {/* LEFT PANEL: Prescription Preview (A4) */}
-                <div className="w-full lg:w-1/2 p-4 lg:p-8 overflow-y-auto bg-gray-100 flex justify-center border-b lg:border-r border-gray-200 lg:h-full">
+                <div className="w-full lg:w-1/2 p-4 lg:p-8 overflow-y-auto bg-gray-100 dark:bg-slate-900/50 flex justify-center border-b lg:border-r border-gray-200 dark:border-slate-800 lg:h-full">
                     <div
                         ref={printableRef}
                         className="bg-white shadow-xl w-full max-w-[210mm] min-h-[297mm] p-[30px] sm:p-[40px] relative flex flex-col print:shadow-none print:w-full print:h-full print:absolute print:top-0 print:left-0 print:m-0 print:p-[20mm]"
@@ -459,10 +459,10 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                 </div>
 
                 {/* RIGHT PANEL: Controls & Search */}
-                <div className="w-full lg:w-1/2 flex flex-col h-1/2 lg:h-full bg-white print:hidden">
+                <div className="w-full lg:w-1/2 flex flex-col h-1/2 lg:h-full bg-white dark:bg-slate-900 print:hidden">
 
                     {/* Search Bar */}
-                    <div className="p-4 border-b border-gray-200 bg-white sticky top-0 z-10">
+                    <div className="p-4 border-b border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-10">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                             <input
@@ -470,7 +470,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                 placeholder="Ürün adı veya kodu ara (ör: OP1535, Dizlik)..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all text-sm font-medium"
+                                className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all text-sm font-medium text-gray-900 dark:text-white"
                             />
                             {searchTerm && (
                                 <button
@@ -496,15 +496,15 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                             <button
                                                 key={product.id}
                                                 onClick={() => addProduct(product)}
-                                                className="w-full text-left p-3 rounded-lg border border-gray-200 hover:border-blue-200 hover:bg-blue-50 transition-all group flex items-start gap-3"
+                                                className="w-full text-left p-3 rounded-lg border border-gray-200 dark:border-slate-700 hover:border-blue-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all group flex items-start gap-3"
                                             >
-                                                <div className="bg-blue-100 text-blue-600 p-2 rounded-lg group-hover:bg-blue-200 transition-colors">
+                                                <div className="bg-blue-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 p-2 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-slate-700 transition-colors">
                                                     <PlusCircle size={18} />
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-gray-800 text-sm">{product.name}</div>
-                                                    <div className="text-xs text-gray-500 mt-0.5">
-                                                        <span className="font-mono bg-gray-100 px-1 rounded mr-1">{product.code}</span>
+                                                    <div className="font-bold text-gray-800 dark:text-white text-sm">{product.name}</div>
+                                                    <div className="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
+                                                        <span className="font-mono bg-gray-100 dark:bg-slate-800 px-1 rounded mr-1">{product.code}</span>
                                                         {product.info}
                                                     </div>
                                                 </div>
@@ -521,7 +521,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                             <>
                                 {/* Quick Actions Grid */}
                                 <div>
-                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                    <h3 className="text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
                                         <Briefcase size={14} />
                                         Hazır Açıklamalar
                                     </h3>
@@ -530,7 +530,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                             <button
                                                 key={i}
                                                 onClick={() => addQuickTemplate(tpl)}
-                                                className="p-2 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-600 text-xs font-medium transition-all text-center h-full truncate"
+                                                className="p-2 rounded-lg border border-gray-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800 text-gray-600 dark:text-slate-300 text-xs font-medium transition-all text-center h-full truncate"
                                                 title={tpl.text}
                                             >
                                                 {tpl.label}
@@ -539,22 +539,22 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                     </div>
                                 </div>
 
-                                <div className="border-t border-gray-100 pt-4">
-                                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Sık Kullanılan Ürünler</h3>
+                                <div className="border-t border-gray-100 dark:border-slate-800 pt-4">
+                                    <h3 className="text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-3">Sık Kullanılan Ürünler</h3>
                                     <div className="space-y-2">
                                         {PRODUCTS.slice(0, 5).map(product => (
                                             <button
                                                 key={product.id}
                                                 onClick={() => addProduct(product)}
-                                                className="w-full text-left p-3 rounded-lg border border-gray-100 hover:border-gray-300 hover:bg-gray-50 transition-all flex items-center justify-between group"
+                                                className="w-full text-left p-3 rounded-lg border border-gray-100 dark:border-slate-800 hover:border-gray-300 dark:hover:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all flex items-center justify-between group"
                                             >
-                                                <span className="text-sm font-medium text-gray-700">{product.name}</span>
-                                                <Plus size={16} className="text-gray-300 group-hover:text-gray-600" />
+                                                <span className="text-sm font-medium text-gray-700 dark:text-slate-300">{product.name}</span>
+                                                <Plus size={16} className="text-gray-300 dark:text-slate-600 group-hover:text-gray-600 dark:group-hover:text-slate-400" />
                                             </button>
                                         ))}
                                         <button
                                             onClick={() => setSearchTerm(' ')} // Trigger list view
-                                            className="w-full py-2 text-xs text-blue-600 hover:underline text-center"
+                                            className="w-full py-2 text-xs text-blue-600 dark:text-blue-400 hover:underline text-center"
                                         >
                                             Tüm Ürünleri Gör
                                         </button>
@@ -565,18 +565,18 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                     </div>
 
                     {/* Footer Controls */}
-                    <div className="p-4 bg-white border-t border-gray-200">
+                    <div className="p-4 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800">
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setIsClearModalOpen(true)}
-                                className="flex-1 py-3 px-4 rounded-xl border border-red-200 text-red-600 font-bold hover:bg-red-50 flex items-center justify-center gap-2 transition-all transition-colors"
+                                className="flex-1 py-3 px-4 rounded-xl border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 font-bold hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center justify-center gap-2 transition-all transition-colors"
                             >
                                 <Trash2 size={18} />
                                 Temizle
                             </button>
                             <button
                                 onClick={handlePrint}
-                                className="flex-[2] py-3 px-4 rounded-xl bg-gray-900 text-white font-bold hover:bg-black shadow-lg shadow-gray-200 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                                className="flex-[2] py-3 px-4 rounded-xl bg-gray-900 dark:bg-blue-600 text-white font-bold hover:bg-black dark:hover:bg-blue-700 shadow-lg shadow-gray-200 dark:shadow-blue-900/20 flex items-center justify-center gap-2 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                             >
                                 <Printer size={18} />
                                 YAZDIR

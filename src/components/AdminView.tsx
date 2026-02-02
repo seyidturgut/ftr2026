@@ -36,7 +36,7 @@ const AdminView: React.FC = () => {
     return (
         <div className="max-w-6xl mx-auto space-y-6">
             {/* Admin Header & Local Nav */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm">
                 <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
                     {tabs.map((tab) => {
                         const Icon = tab.icon;
@@ -48,7 +48,7 @@ const AdminView: React.FC = () => {
                                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap
                                     ${isActive
                                         ? 'bg-blue-600 text-white shadow-md'
-                                        : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'}`}
+                                        : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white'}`}
                             >
                                 <Icon size={18} />
                                 {tab.label}

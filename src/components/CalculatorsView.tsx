@@ -103,15 +103,15 @@ export default function CalculatorsView({ onBack }: { onBack: () => void }) {
     if (!isAuthenticated) {
         return (
             <div className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 text-center relative overflow-hidden">
+                <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-slate-800 text-center relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-purple-600"></div>
-                    <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-20 h-20 bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Lock size={40} />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
                         Hesaplamalar İçin Giriş Yapmalısınız
                     </h2>
-                    <p className="text-gray-500 max-w-lg mx-auto mb-8 text-lg">
+                    <p className="text-gray-500 dark:text-slate-400 max-w-lg mx-auto mb-8 text-lg">
                         Klinik ölçekleri kullanmak, skorlamak ve sonuçları kaydetmek için lütfen üye girişi yapınız.
                     </p>
                     <Link
@@ -130,12 +130,12 @@ export default function CalculatorsView({ onBack }: { onBack: () => void }) {
                 {/* Blurry Preview of Calculators */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 opacity-40 pointer-events-none filter blur-sm">
                     {calculators.slice(0, 3).map((calc) => (
-                        <div key={calc.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col h-full">
-                            <div className={`w-12 h-12 ${calc.bgColor} ${calc.color} rounded-xl flex items-center justify-center mb-4`}>
+                        <div key={calc.id} className="bg-white p-6 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm flex flex-col h-full">
+                            <div className={`w-12 h-12 ${calc.bgColor} dark:bg-slate-800 ${calc.color} rounded-xl flex items-center justify-center mb-4`}>
                                 <calc.icon size={24} />
                             </div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-2">{calc.title}</h3>
-                            <p className="text-sm text-gray-500">{calc.description}</p>
+                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{calc.title}</h3>
+                            <p className="text-sm text-gray-500 dark:text-slate-400">{calc.description}</p>
                         </div>
                     ))}
                 </div>
@@ -173,8 +173,8 @@ export default function CalculatorsView({ onBack }: { onBack: () => void }) {
             {!selectedCalculator ? (
                 <>
                     <div className="mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Ölçekler ve Hesaplayıcılar</h1>
-                        <p className="text-gray-500 text-lg">Klinik pratiğinizde kullanabileceğiniz medikal hesaplama araçları.</p>
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Ölçekler ve Hesaplayıcılar</h1>
+                        <p className="text-gray-500 dark:text-slate-400 text-lg">Klinik pratiğinizde kullanabileceğiniz medikal hesaplama araçları.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -182,9 +182,9 @@ export default function CalculatorsView({ onBack }: { onBack: () => void }) {
                             <button
                                 key={calc.id}
                                 onClick={() => setSelectedCalculator(calc.id)}
-                                className={`group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-left relative overflow-hidden`}
+                                className={`group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-left relative overflow-hidden`}
                             >
-                                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-colors ${calc.bgColor} ${calc.color} shadow-sm group-hover:scale-110 duration-300`}>
+                                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-colors ${calc.bgColor} dark:bg-slate-800 ${calc.color} shadow-sm group-hover:scale-110 duration-300`}>
                                     <calc.icon size={28} />
                                 </div>
 
@@ -192,14 +192,14 @@ export default function CalculatorsView({ onBack }: { onBack: () => void }) {
                                     <ArrowRight className="text-gray-300 group-hover:text-blue-500" />
                                 </div>
 
-                                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                     {calc.title}
                                 </h3>
-                                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                                <p className="text-gray-500 dark:text-slate-400 text-sm leading-relaxed mb-4">
                                     {calc.description}
                                 </p>
 
-                                <div className="mt-auto pt-4 border-t border-gray-50 flex items-center gap-2 text-xs font-bold text-gray-400 group-hover:text-blue-600 transition-colors">
+                                <div className="mt-auto pt-4 border-t border-gray-50 dark:border-slate-800 flex items-center gap-2 text-xs font-bold text-gray-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                     HEMEN HESAPLA <ArrowRight size={12} />
                                 </div>
 
@@ -224,12 +224,12 @@ export default function CalculatorsView({ onBack }: { onBack: () => void }) {
             )}
 
             {/* Empty State / Coming Soon */}
-            <div className="mt-12 p-8 bg-gray-50 rounded-2xl border border-dashed border-gray-200 text-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300 shadow-sm">
+            <div className="mt-12 p-8 bg-gray-50 dark:bg-slate-900 rounded-2xl border border-dashed border-gray-200 dark:border-slate-800 text-center">
+                <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300 dark:text-slate-600 shadow-sm">
                     <Calculator size={32} />
                 </div>
-                <h3 className="text-lg font-bold text-gray-400 mb-2">Daha Fazlası Yakında...</h3>
-                <p className="text-gray-400 text-sm max-w-md mx-auto">
+                <h3 className="text-lg font-bold text-gray-400 dark:text-slate-500 mb-2">Daha Fazlası Yakında...</h3>
+                <p className="text-gray-400 dark:text-slate-500 text-sm max-w-md mx-auto">
                     Kütüphanemize düzenli olarak yeni ölçekler ve hesaplayıcılar eklenmektedir. İstediğiniz bir ölçek varsa bizimle iletişime geçebilirsiniz.
                 </p>
             </div>

@@ -48,7 +48,7 @@ const AdminDashboard: React.FC = () => {
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse">
                 {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="h-32 bg-gray-100 rounded-xl border border-gray-200"></div>
+                    <div key={i} className="h-32 bg-gray-100 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800"></div>
                 ))}
             </div>
         );
@@ -61,15 +61,15 @@ const AdminDashboard: React.FC = () => {
                 {statCards.map((stat, idx) => {
                     const Icon = stat.icon;
                     return (
-                        <div key={idx} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div key={idx} className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex items-center justify-between mb-4">
                                 <div className={`p-3 rounded-lg ${stat.color} text-white`}>
                                     <Icon size={24} />
                                 </div>
                                 <TrendingUp size={16} className="text-emerald-500" />
                             </div>
-                            <h3 className="text-gray-500 text-sm font-medium">{stat.label}</h3>
-                            <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value.toLocaleString()}</p>
+                            <h3 className="text-gray-500 dark:text-slate-400 text-sm font-medium">{stat.label}</h3>
+                            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{stat.value.toLocaleString()}</p>
                         </div>
                     );
                 })}
@@ -77,24 +77,24 @@ const AdminDashboard: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Recent Activities Placeholder */}
-                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                         <Clock size={20} className="text-blue-600" />
                         Son Aktiviteler
                     </h3>
                     <div className="space-y-4">
-                        <p className="text-sm text-gray-500 text-center py-8">Aktivite günlüğü yakında eklenecek.</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400 text-center py-8">Aktivite günlüğü yakında eklenecek.</p>
                     </div>
                 </div>
 
                 {/* Popular Content Placeholder */}
-                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                         <TrendingUp size={20} className="text-emerald-600" />
                         Popüler İçerikler
                     </h3>
                     <div className="space-y-4">
-                        <p className="text-sm text-gray-500 text-center py-8">İstatistik verileri işleniyor.</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400 text-center py-8">İstatistik verileri işleniyor.</p>
                     </div>
                 </div>
             </div>

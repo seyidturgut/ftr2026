@@ -109,7 +109,7 @@ const ProfileView: React.FC = () => {
 
     return (
         <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
                 {/* Compact Header */}
                 <div className="bg-gradient-to-r from-blue-600 to-sky-600 px-4 py-6">
                     <div className="flex items-center gap-3">
@@ -138,12 +138,12 @@ const ProfileView: React.FC = () => {
                                 type="button"
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={uploadingPhoto}
-                                className="absolute bottom-0 right-0 p-1.5 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+                                className="absolute bottom-0 right-0 p-1.5 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50"
                             >
                                 {uploadingPhoto ? (
                                     <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                                 ) : (
-                                    <Camera size={14} className="text-gray-700" />
+                                    <Camera size={14} className="text-gray-700 dark:text-slate-300" />
                                 )}
                             </button>
                         </div>
@@ -157,45 +157,45 @@ const ProfileView: React.FC = () => {
                 {/* Compact Form */}
                 <form onSubmit={handleSubmit} className="p-4 space-y-4">
                     {message && (
-                        <div className={`p-3 rounded-lg text-sm ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                        <div className={`p-3 rounded-lg text-sm ${message.type === 'success' ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'}`}>
                             {message.text}
                         </div>
                     )}
 
                     {/* Kişisel Bilgiler */}
                     <div>
-                        <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                             <User size={16} className="text-blue-600" />
                             Kişisel Bilgiler
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Ad</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">Ad</label>
                                 <input
                                     type="text"
                                     value={formData.first_name}
                                     onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Soyad</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">Soyad</label>
                                 <input
                                     type="text"
                                     value={formData.last_name}
                                     onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-                                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     required
                                 />
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Ünvan</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">Ünvan</label>
                                 <input
                                     type="text"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                     placeholder="Örn: Dr., Prof., Uzm."
                                 />
                             </div>
@@ -203,38 +203,38 @@ const ProfileView: React.FC = () => {
                     </div>
 
                     {/* İletişim */}
-                    <div className="border-t border-gray-200 pt-4">
-                        <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <div className="border-t border-gray-200 dark:border-slate-800 pt-4">
+                        <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                             <Mail size={16} className="text-blue-600" />
                             İletişim
                         </h2>
                         <div>
-                            <label className="block text-xs font-medium text-gray-700 mb-1">E-posta</label>
+                            <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">E-posta</label>
                             <input
                                 type="email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 required
                             />
                         </div>
                     </div>
 
                     {/* Şifre */}
-                    <div className="border-t border-gray-200 pt-4">
-                        <h2 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <div className="border-t border-gray-200 dark:border-slate-800 pt-4">
+                        <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                             <Lock size={16} className="text-blue-600" />
                             Şifre Değiştir
                         </h2>
                         <div className="space-y-3">
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Mevcut Şifre</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">Mevcut Şifre</label>
                                 <div className="relative">
                                     <input
                                         type={showOldPassword ? 'text' : 'password'}
                                         value={formData.old_password}
                                         onChange={(e) => setFormData({ ...formData, old_password: e.target.value })}
-                                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                                        className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
                                         placeholder="Şifre değiştirmek için gerekli"
                                     />
                                     <button
@@ -248,13 +248,13 @@ const ProfileView: React.FC = () => {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-1">Yeni Şifre</label>
+                                    <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">Yeni Şifre</label>
                                     <div className="relative">
                                         <input
                                             type={showNewPassword ? 'text' : 'password'}
                                             value={formData.new_password}
                                             onChange={(e) => setFormData({ ...formData, new_password: e.target.value })}
-                                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                                            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
                                             placeholder="En az 6 karakter"
                                         />
                                         <button
@@ -267,12 +267,12 @@ const ProfileView: React.FC = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-1">Yeni Şifre (Tekrar)</label>
+                                    <label className="block text-xs font-medium text-gray-700 dark:text-slate-400 mb-1">Yeni Şifre (Tekrar)</label>
                                     <input
                                         type="password"
                                         value={formData.confirm_password}
                                         onChange={(e) => setFormData({ ...formData, confirm_password: e.target.value })}
-                                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-slate-700 dark:bg-slate-950 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                         placeholder="Tekrar girin"
                                     />
                                 </div>
@@ -281,7 +281,7 @@ const ProfileView: React.FC = () => {
                     </div>
 
                     {/* Kaydet */}
-                    <div className="border-t border-gray-200 pt-4">
+                    <div className="border-t border-gray-200 dark:border-slate-800 pt-4">
                         <button
                             type="submit"
                             disabled={loading}

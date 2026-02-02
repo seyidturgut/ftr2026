@@ -185,11 +185,11 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
     return (
         <div className="animate-in fade-in duration-500">
             {notification && (
-                <div className="fixed top-24 right-6 z-50 bg-white border border-slate-200 shadow-xl rounded-xl p-4 flex items-center gap-3 animate-in fade-in slide-in-from-right-4">
+                <div className="fixed top-24 right-6 z-50 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl rounded-xl p-4 flex items-center gap-3 animate-in fade-in slide-in-from-right-4">
                     <div className={`p-2 rounded-full ${notification.type === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
                         {notification.type === 'success' ? <CheckCircle size={18} /> : <FileText size={18} />}
                     </div>
-                    <p className="font-semibold text-slate-700 text-sm">{notification.message}</p>
+                    <p className="font-semibold text-slate-700 dark:text-slate-200 text-sm">{notification.message}</p>
                 </div>
             )}
 
@@ -198,13 +198,13 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                 <div className="flex items-center gap-3 mb-4 overflow-x-auto no-scrollbar">
                     <button
                         onClick={onBack}
-                        className="flex items-center gap-2 px-3 py-1.5 bg-white text-slate-500 hover:text-blue-600 font-bold transition-all rounded-lg border border-slate-100 shadow-sm shrink-0 active:scale-95"
+                        className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-bold transition-all rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm shrink-0 active:scale-95"
                     >
                         <ChevronLeft size={16} />
                         <span className="text-xs">Geri</span>
                     </button>
 
-                    <div className="h-4 w-px bg-slate-200 shrink-0 mx-1"></div>
+                    <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 shrink-0 mx-1"></div>
 
                     <nav className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap">
                         <span onClick={onBack} className="hover:text-blue-600 cursor-pointer transition-colors">
@@ -226,14 +226,14 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                 </div>
 
                 {/* Compact Main Card */}
-                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-3xl border border-white/50 shadow-xl shadow-blue-500/5 relative overflow-hidden">
+                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-5 rounded-3xl border border-white/50 dark:border-slate-800/50 shadow-xl shadow-blue-500/5 relative overflow-hidden">
                     <div className="flex flex-col md:flex-row gap-4 md:items-start justify-between">
 
                         {/* Initial Left Side: Title + Meta (Badges Removed) */}
                         <div className="flex-1 md:flex-none md:w-1/3 min-w-0 space-y-3">
 
                             {/* Title */}
-                            <h1 className="text-xl md:text-2xl font-black text-slate-900 leading-tight tracking-tight">
+                            <h1 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white leading-tight tracking-tight">
                                 {content.title}
                             </h1>
 
@@ -266,8 +266,8 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                                 <button
                                     onClick={handleToggleFavorite}
                                     className={`h-9 w-9 flex items-center justify-center rounded-lg transition-all shadow-sm border ${isFavorite
-                                        ? 'bg-rose-50 border-rose-100 text-rose-500'
-                                        : 'bg-white border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200'
+                                        ? 'bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-900 text-rose-500 dark:text-rose-400'
+                                        : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-rose-500 hover:border-rose-200'
                                         }`}
                                     title={isFavorite ? 'Favorilerden Çıkar' : 'Favorilere Ekle'}
                                 >
@@ -295,13 +295,13 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                 </div>
 
                 {/* Compact Tabs - Integrated into bottom of card */}
-                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar">
+                <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 overflow-x-auto no-scrollbar">
                     {content.pdf_url && (
                         <button
                             onClick={() => setActiveTab('pdf')}
                             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all border ${activeTab === 'pdf'
-                                ? 'bg-blue-50 border-blue-200 text-blue-700 ring-1 ring-blue-200'
-                                : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
+                                ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 ring-1 ring-blue-200 dark:ring-blue-800'
+                                : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                                 }`}
                         >
                             <FileText size={14} />
@@ -312,8 +312,8 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                         <button
                             onClick={() => setActiveTab('video')}
                             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all border ${activeTab === 'video'
-                                ? 'bg-purple-50 border-purple-200 text-purple-700 ring-1 ring-purple-200'
-                                : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
+                                ? 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-400 ring-1 ring-purple-200 dark:ring-purple-800'
+                                : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                                 }`}
                         >
                             <Play size={14} />
@@ -324,8 +324,8 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                         <button
                             onClick={() => setActiveTab('pptx')}
                             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all border ${activeTab === 'pptx'
-                                ? 'bg-orange-50 border-orange-200 text-orange-700 ring-1 ring-orange-200'
-                                : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
+                                ? 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-400 ring-1 ring-orange-200 dark:ring-orange-800'
+                                : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                                 }`}
                         >
                             <FileText size={14} />
@@ -336,8 +336,8 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                         <button
                             onClick={() => setActiveTab('reference')}
                             className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all border ${activeTab === 'reference'
-                                ? 'bg-emerald-50 border-emerald-200 text-emerald-700 ring-1 ring-emerald-200'
-                                : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
+                                ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-200 dark:ring-emerald-800'
+                                : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                                 }`}
                         >
                             <CheckCircle size={14} />
@@ -430,7 +430,7 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                     )}
 
                     {!activeTab && content.cover_image && (
-                        <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100">
+                        <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-slate-800">
                             <img
                                 src={`/uploads/${content.cover_image}`}
                                 alt={content.title}
@@ -444,8 +444,8 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div className="lg:col-span-8">
                         <AdBanner position="inline" className="mb-8" categoryIds={categoryIds} />
-                        <div className="bg-white p-6 md:p-10 rounded-3xl border border-slate-100 shadow-xl prose prose-slate prose-sm max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-600 prose-img:rounded-2xl prose-strong:text-slate-900">
-                            <h3 className="text-xl font-black mb-6 text-slate-900 border-b border-slate-100 pb-4 uppercase tracking-[0.2em] text-[10px] flex items-center gap-2">
+                        <div className="bg-white dark:bg-slate-900 p-6 md:p-10 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-xl prose prose-slate dark:prose-invert prose-sm max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-blue-600 prose-img:rounded-2xl prose-strong:text-slate-900 dark:prose-strong:text-white">
+                            <h3 className="text-xl font-black mb-6 text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-4 uppercase tracking-[0.2em] text-[10px] flex items-center gap-2">
                                 <div className="w-1 h-1 rounded-full bg-blue-500" />
                                 İçerik Açıklaması
                             </h3>
@@ -457,17 +457,17 @@ export default function ContentDetailView({ slug, onBack }: ContentDetailViewPro
                         <div className="sticky top-28 space-y-6">
                             <AdBanner position="sidebar" categoryIds={categoryIds} />
 
-                            <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-xl relative group overflow-hidden">
+                            <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-xl relative group overflow-hidden">
                                 <div className="absolute -top-4 -right-4 p-4 opacity-[0.03] group-hover:scale-110 transition-transform duration-700 text-slate-900">
                                     <CheckCircle size={100} />
                                 </div>
-                                <h4 className="text-[9px] font-black text-slate-900 uppercase tracking-[0.2em] mb-6 flex items-center gap-2 relative z-10">
+                                <h4 className="text-[9px] font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-2 relative z-10">
                                     <div className="w-1 h-1 rounded-full bg-indigo-500" />
                                     Tags
                                 </h4>
                                 <div className="flex flex-wrap gap-2 relative z-10">
                                     {['FTR', 'Rehabilitasyon', 'Akademik'].map(tag => (
-                                        <span key={tag} className="text-[9px] font-black px-4 py-2 bg-white text-slate-600 rounded-xl hover:text-blue-600 transition-all cursor-default border border-slate-100 shadow-sm">
+                                        <span key={tag} className="text-[9px] font-black px-4 py-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:text-blue-600 dark:hover:text-blue-400 transition-all cursor-default border border-slate-100 dark:border-slate-700 shadow-sm">
                                             #{tag}
                                         </span>
                                     ))}

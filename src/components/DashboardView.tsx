@@ -85,23 +85,23 @@ const DashboardView: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex items-center gap-4">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
                     <div className="p-3 bg-emerald-100 text-emerald-600 rounded-xl">
                         <Download size={24} />
                     </div>
                     <div>
-                        <p className="text-slate-500 text-sm font-medium">İndirilenler</p>
-                        <h3 className="text-2xl font-bold text-slate-800">{stats.downloads}</h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">İndirilenler</p>
+                        <h3 className="text-2xl font-bold text-slate-800 dark:text-white">{stats.downloads}</h3>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex items-center gap-4">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-4">
                     <div className="p-3 bg-purple-100 text-purple-600 rounded-xl">
                         <Clock size={24} />
                     </div>
                     <div>
-                        <p className="text-slate-500 text-sm font-medium">Son Ziyaret</p>
-                        <p className="text-sm font-semibold text-slate-800 truncate max-w-[150px]">
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Son Ziyaret</p>
+                        <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[150px]">
                             {user?.last_login ? new Date(user.last_login).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-'}
                         </p>
                     </div>
@@ -110,13 +110,13 @@ const DashboardView: React.FC = () => {
 
             {lastViewed && (
                 <div>
-                    <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
                         <Clock size={20} className="text-sky-600" />
                         Son Kaldığınız Yerden Devam Edin
                     </h2>
                     <Link href={`/content/${lastViewed.slug}`} className="block group">
-                        <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-md transition-all flex items-start gap-4">
-                            <div className="w-24 h-24 shrink-0 rounded-xl overflow-hidden bg-slate-100">
+                        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex items-start gap-4">
+                            <div className="w-24 h-24 shrink-0 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800">
                                 {lastViewed.cover_image ? (
                                     <img src={`/uploads/${lastViewed.cover_image}`} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                 ) : (
@@ -130,14 +130,14 @@ const DashboardView: React.FC = () => {
                                     {getTypeIcon(lastViewed.page_type)}
                                     {lastViewed.page_type === 'dokuman' ? 'Doküman' : lastViewed.page_type === 'seminer' ? 'Seminer' : 'Makale'}
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors truncate">
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                                     {lastViewed.title}
                                 </h3>
-                                <p className="text-slate-500 text-sm line-clamp-2 mb-3">
+                                <p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2 mb-3">
                                     {lastViewed.description}
                                 </p>
                             </div>
-                            <div className="self-center pr-2 text-slate-300 group-hover:text-blue-500 transition-colors">
+                            <div className="self-center pr-2 text-slate-300 dark:text-slate-600 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
                                 <ChevronRight size={24} />
                             </div>
                         </div>
@@ -147,14 +147,14 @@ const DashboardView: React.FC = () => {
 
             {favorites.length > 0 ? (
                 <div>
-                    <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
                         <Heart size={20} className="text-rose-500" fill="currentColor" />
                         Favorilerim
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {favorites.map((item) => (
-                            <Link key={item.id} href={`/content/${item.slug}`} className="group bg-white rounded-xl border border-slate-200 p-4 hover:border-rose-200 hover:shadow-lg hover:shadow-rose-50 transition-all flex gap-4">
-                                <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-slate-100">
+                            <Link key={item.id} href={`/content/${item.slug}`} className="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:border-rose-200 dark:hover:border-rose-900 hover:shadow-lg hover:shadow-rose-50 dark:hover:shadow-none transition-all flex gap-4">
+                                <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800">
                                     {item.cover_image ? (
                                         <img src={`/uploads/${item.cover_image}`} alt="" className="w-full h-full object-cover" />
                                     ) : (
@@ -164,10 +164,10 @@ const DashboardView: React.FC = () => {
                                     )}
                                 </div>
                                 <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                    <h4 className="font-bold text-slate-900 text-sm mb-1 line-clamp-2 group-hover:text-rose-600 transition-colors">
+                                    <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1 line-clamp-2 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                                         {item.title}
                                     </h4>
-                                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                                    <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                                         {getTypeIcon(item.page_type)}
                                         <span className="capitalize">{item.page_type}</span>
                                         <span>•</span>
@@ -179,15 +179,15 @@ const DashboardView: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div className="bg-slate-50 rounded-2xl p-8 text-center border border-dashed border-slate-200">
-                    <div className="w-16 h-16 bg-slate-100 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-8 text-center border border-dashed border-slate-200 dark:border-slate-800">
+                    <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Heart size={32} />
                     </div>
-                    <h3 className="text-slate-900 font-bold mb-1">Henüz Favoriniz Yok</h3>
-                    <p className="text-slate-500 text-sm max-w-xs mx-auto mb-4">
+                    <h3 className="text-slate-900 dark:text-white font-bold mb-1">Henüz Favoriniz Yok</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm max-w-xs mx-auto mb-4">
                         İlginizi çeken içerikleri kalp ikonuna tıklayarak buraya ekleyebilirsiniz.
                     </p>
-                    <Link href="/content?type=akademik" className="text-sky-600 font-bold text-sm hover:underline">
+                    <Link href="/content?type=akademik" className="text-sky-600 dark:text-sky-400 font-bold text-sm hover:underline">
                         İçerikleri Keşfet
                     </Link>
                 </div>

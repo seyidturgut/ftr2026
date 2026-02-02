@@ -44,7 +44,7 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
         },
         editorProps: {
             attributes: {
-                class: 'prose prose-sm sm:prose-base max-w-none focus:outline-none min-h-[300px] p-4',
+                class: 'prose prose-sm sm:prose-base dark:prose-invert max-w-none focus:outline-none min-h-[300px] p-4',
             },
         },
     });
@@ -70,8 +70,8 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
     };
 
     return (
-        <div className="border border-gray-200 rounded-2xl overflow-hidden bg-white focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 transition-all">
-            <div className="bg-gray-50 border-b border-gray-100 p-2 flex flex-wrap gap-1">
+        <div className="border border-gray-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-slate-950 focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 transition-all">
+            <div className="bg-gray-50 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 p-2 flex flex-wrap gap-1">
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleBold().run()}
                     active={editor.isActive('bold')}
@@ -91,7 +91,7 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
                     <UnderlineIcon size={18} />
                 </MenuButton>
 
-                <div className="w-px h-6 bg-gray-200 mx-1 self-center" />
+                <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-1 self-center" />
 
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -106,7 +106,7 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
                     <Heading2 size={18} />
                 </MenuButton>
 
-                <div className="w-px h-6 bg-gray-200 mx-1 self-center" />
+                <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-1 self-center" />
 
                 <MenuButton
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -127,7 +127,7 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
                     <Quote size={18} />
                 </MenuButton>
 
-                <div className="w-px h-6 bg-gray-200 mx-1 self-center" />
+                <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-1 self-center" />
 
                 <MenuButton onClick={setLink} active={editor.isActive('link')}>
                     <LinkIcon size={18} />
@@ -136,7 +136,7 @@ const TiptapEditor = ({ content, onChange }: TiptapEditorProps) => {
                     <ImageIcon size={18} />
                 </MenuButton>
 
-                <div className="w-px h-6 bg-gray-200 mx-1 self-center ml-auto" />
+                <div className="w-px h-6 bg-gray-200 dark:bg-slate-800 mx-1 self-center ml-auto" />
 
                 <MenuButton onClick={() => editor.chain().focus().undo().run()}>
                     <Undo size={18} />
@@ -154,7 +154,7 @@ const MenuButton = ({ onClick, active, children }: { onClick: () => void, active
     <button
         type="button"
         onClick={onClick}
-        className={`p-2 rounded-lg transition-all ${active ? 'bg-blue-600 text-white shadow-md shadow-blue-200' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900'}`}
+        className={`p-2 rounded-lg transition-all ${active ? 'bg-blue-600 text-white shadow-md shadow-blue-200 dark:shadow-none' : 'text-gray-500 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white'}`}
     >
         {children}
     </button>

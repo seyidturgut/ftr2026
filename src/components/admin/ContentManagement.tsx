@@ -333,7 +333,7 @@ const ContentManagement: React.FC = () => {
                             setSearchTerm(e.target.value);
                             setCurrentPage(1); // Reset to page 1 on search
                         }}
-                        className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all"
+                        className="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all dark:text-white"
                     />
                 </div>
 
@@ -344,7 +344,7 @@ const ContentManagement: React.FC = () => {
                             setSelectedCategoryId(e.target.value === 'all' ? 'all' : parseInt(e.target.value));
                             setCurrentPage(1); // Reset to page 1 on filter
                         }}
-                        className="w-full px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer"
+                        className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all cursor-pointer dark:text-white"
                     >
                         <option value="all">Tüm Kategoriler</option>
                         {categories.map(cat => {
@@ -371,10 +371,10 @@ const ContentManagement: React.FC = () => {
                 </button>
             </div>
 
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-gray-100 dark:border-slate-800 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-gray-50/50 border-b border-gray-100 font-bold text-gray-500 uppercase tracking-widest text-[10px]">
+                        <thead className="bg-gray-50/50 dark:bg-slate-800/50 border-b border-gray-100 dark:border-slate-800 font-bold text-gray-500 dark:text-slate-400 uppercase tracking-widest text-[10px]">
                             <tr>
                                 <th className="px-8 py-5">İçerik</th>
                                 <th className="px-6 py-5">Kategori & Tür</th>
@@ -383,16 +383,16 @@ const ContentManagement: React.FC = () => {
                                 <th className="px-8 py-5 text-right">İşlemler</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-50">
+                        <tbody className="divide-y divide-gray-50 dark:divide-slate-800">
                             {loading ? (
                                 [1, 2, 3, 4, 5].map(i => (
                                     <tr key={i} className="animate-pulse">
                                         <td className="px-8 py-5">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 bg-gray-100 rounded-xl"></div>
+                                                <div className="w-12 h-12 bg-gray-100 dark:bg-slate-800 rounded-xl"></div>
                                                 <div className="space-y-2">
-                                                    <div className="h-4 w-32 bg-gray-100 rounded"></div>
-                                                    <div className="h-3 w-16 bg-gray-50 rounded"></div>
+                                                    <div className="h-4 w-32 bg-gray-100 dark:bg-slate-800 rounded"></div>
+                                                    <div className="h-3 w-16 bg-gray-50 dark:bg-slate-800 rounded"></div>
                                                 </div>
                                             </div>
                                         </td>
@@ -428,7 +428,7 @@ const ContentManagement: React.FC = () => {
                                 </tr>
                             ) : (
                                 contents.map((item) => (
-                                    <tr key={item.id} className="hover:bg-blue-50/30 transition-colors group">
+                                    <tr key={item.id} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group">
                                         <td className="px-8 py-5">
                                             <div className="flex items-center gap-4">
                                                 {item.cover_image ? (
@@ -439,41 +439,41 @@ const ContentManagement: React.FC = () => {
                                                     </div>
                                                 )}
                                                 <div>
-                                                    <div className="font-bold text-gray-900 line-clamp-1">{item.title}</div>
-                                                    <div className="text-[10px] text-gray-400 font-mono mt-0.5">#{item.slug}</div>
+                                                    <div className="font-bold text-gray-900 dark:text-white line-clamp-1">{item.title}</div>
+                                                    <div className="text-[10px] text-gray-400 dark:text-slate-500 font-mono mt-0.5">#{item.slug}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
                                             <div className="flex flex-col gap-1">
-                                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-blue-50 text-blue-600 w-fit">{item.category_name}</span>
-                                                <span className="text-gray-500 font-medium capitalize text-xs">{item.content_type}</span>
+                                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 w-fit">{item.category_name}</span>
+                                                <span className="text-gray-500 dark:text-slate-400 font-medium capitalize text-xs">{item.content_type}</span>
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
                                             <div className="flex items-center justify-center gap-1.5">
-                                                {item.pdf_url && <div className="p-1.5 bg-red-50 text-red-500 rounded-lg" title="PDF Mevcut"><FileUp size={14} /></div>}
-                                                {item.video_url && <div className="p-1.5 bg-purple-50 text-purple-500 rounded-lg" title="Video Mevcut"><Video size={14} /></div>}
-                                                {item.pptx_url && <div className="p-1.5 bg-orange-50 text-orange-500 rounded-lg" title="PPTX Mevcut"><Download size={14} /></div>}
-                                                {item.reference_pdf_url && <div className="p-1.5 bg-emerald-50 text-emerald-500 rounded-lg" title="Ref. Makale Mevcut"><FileUp size={14} /></div>}
+                                                {item.pdf_url && <div className="p-1.5 bg-red-50 dark:bg-red-900/20 text-red-500 dark:text-red-400 rounded-lg" title="PDF Mevcut"><FileUp size={14} /></div>}
+                                                {item.video_url && <div className="p-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-500 dark:text-purple-400 rounded-lg" title="Video Mevcut"><Video size={14} /></div>}
+                                                {item.pptx_url && <div className="p-1.5 bg-orange-50 dark:bg-orange-900/20 text-orange-500 dark:text-orange-400 rounded-lg" title="PPTX Mevcut"><Download size={14} /></div>}
+                                                {item.reference_pdf_url && <div className="p-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 dark:text-emerald-400 rounded-lg" title="Ref. Makale Mevcut"><FileUp size={14} /></div>}
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
                                             {item.requires_auth ? (
-                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 text-amber-600 text-xs font-bold">
+                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 text-xs font-bold">
                                                     <Lock size={12} /> Üyelik
                                                 </span>
                                             ) : (
-                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-600 text-xs font-bold">
+                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
                                                     <Unlock size={12} /> Herkese Açık
                                                 </span>
                                             )}
                                         </td>
                                         <td className="px-8 py-5 text-right">
                                             <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button onClick={() => window.open(`/content/${item.slug}`, '_blank')} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"><ExternalLink size={16} /></button>
-                                                <button onClick={() => handleEdit(item)} className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all"><Edit2 size={16} /></button>
-                                                <button onClick={() => handleDelete(item.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"><Trash2 size={16} /></button>
+                                                <button onClick={() => window.open(`/content/${item.slug}`, '_blank')} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-xl transition-all"><ExternalLink size={16} /></button>
+                                                <button onClick={() => handleEdit(item)} className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-xl transition-all"><Edit2 size={16} /></button>
+                                                <button onClick={() => handleDelete(item.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition-all"><Trash2 size={16} /></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -484,17 +484,17 @@ const ContentManagement: React.FC = () => {
                 </div>
 
                 {/* Pagination Controls */}
-                <div className="px-8 py-4 bg-gray-50/30 border-t border-gray-100 flex items-center justify-between">
-                    <div className="text-xs text-gray-500 font-medium">
-                        Toplam <span className="font-bold text-gray-900">{totalItems}</span> içerikten
-                        <span className="font-bold text-gray-900"> {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, totalItems)}</span> arası gösteriliyor
+                <div className="px-8 py-4 bg-gray-50/30 dark:bg-slate-800/30 border-t border-gray-100 dark:border-slate-800 flex items-center justify-between">
+                    <div className="text-xs text-gray-500 dark:text-slate-400 font-medium">
+                        Toplam <span className="font-bold text-gray-900 dark:text-white">{totalItems}</span> içerikten
+                        <span className="font-bold text-gray-900 dark:text-white"> {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, totalItems)}</span> arası gösteriliyor
                     </div>
 
                     <div className="flex items-center gap-2">
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1 || loading}
-                            className="p-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:hover:bg-white transition-all"
+                            className="p-2 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-slate-800 transition-all"
                         >
                             <ChevronRight size={18} className="rotate-180" />
                         </button>
@@ -514,8 +514,8 @@ const ContentManagement: React.FC = () => {
                                             onClick={() => setCurrentPage(page)}
                                             className={`w-8 h-8 rounded-lg text-xs font-bold transition-all
                                                 ${currentPage === page
-                                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-100'
-                                                    : 'text-gray-500 hover:bg-gray-100'}`}
+                                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-100 dark:shadow-none'
+                                                    : 'text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800'}`}
                                         >
                                             {page}
                                         </button>
@@ -533,7 +533,7 @@ const ContentManagement: React.FC = () => {
                         <button
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages || loading}
-                            className="p-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:hover:bg-white transition-all"
+                            className="p-2 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-slate-800 transition-all"
                         >
                             <ChevronRight size={18} />
                         </button>
@@ -543,25 +543,25 @@ const ContentManagement: React.FC = () => {
 
             {editingItem && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-300">
-                    <div className="bg-white w-full max-w-5xl h-[90vh] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-500">
-                        <div className="flex items-center justify-between px-10 py-8 border-b border-gray-100 bg-gray-50/50">
+                    <div className="bg-white dark:bg-slate-900 w-full max-w-5xl h-[90vh] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-500">
+                        <div className="flex items-center justify-between px-10 py-8 border-b border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/50">
                             <div>
                                 <div className="flex items-center gap-3">
-                                    <h2 className="text-2xl font-black text-gray-900 tracking-tight">İçeriği Düzenle</h2>
-                                    <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-widest">ID {editingItem.id}</span>
+                                    <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">İçeriği Düzenle</h2>
+                                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest">ID {editingItem.id}</span>
                                 </div>
-                                <p className="text-sm text-gray-500 font-medium mt-1">Gelişmiş içerik editörü ve medya yönetimi</p>
+                                <p className="text-sm text-gray-500 dark:text-slate-400 font-medium mt-1">Gelişmiş içerik editörü ve medya yönetimi</p>
                             </div>
-                            <button onClick={() => setEditingItem(null)} className="p-3 hover:bg-white hover:shadow-xl rounded-2xl transition-all group active:scale-95">
-                                <X size={24} className="text-gray-400 group-hover:text-gray-900" />
+                            <button onClick={() => setEditingItem(null)} className="p-3 hover:bg-white dark:hover:bg-slate-800 hover:shadow-xl rounded-2xl transition-all group active:scale-95">
+                                <X size={24} className="text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                             </button>
                         </div>
 
                         <div className="flex-1 overflow-y-auto px-10 py-8 custom-scrollbar">
                             <form onSubmit={handleSave} className="space-y-10">
                                 {message && (
-                                    <div className={`p-6 rounded-3xl flex items-center gap-4 animate-in zoom-in-95 duration-300 border ${message.type === 'success' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-red-50 text-red-700 border-red-100'}`}>
-                                        <div className={`p-2 rounded-full ${message.type === 'success' ? 'bg-emerald-100' : 'bg-red-100'}`}>
+                                    <div className={`p-6 rounded-3xl flex items-center gap-4 animate-in zoom-in-95 duration-300 border ${message.type === 'success' ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border-red-100 dark:border-red-900/30'}`}>
+                                        <div className={`p-2 rounded-full ${message.type === 'success' ? 'bg-emerald-100 dark:bg-emerald-900/50' : 'bg-red-100 dark:bg-red-900/50'}`}>
                                             {message.type === 'success' ? <Save size={20} /> : <AlertCircle size={20} />}
                                         </div>
                                         <span className="text-sm font-black">{message.text}</span>
@@ -573,7 +573,7 @@ const ContentManagement: React.FC = () => {
                                     <div className="lg:col-span-1 space-y-8">
                                         <div className="space-y-4">
                                             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-1">Kapak Görseli</label>
-                                            <div className="group relative aspect-video w-full rounded-[2rem] overflow-hidden bg-gray-100 border-2 border-dashed border-gray-200 hover:border-blue-400 transition-all cursor-pointer">
+                                            <div className="group relative aspect-video w-full rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-slate-800 border-2 border-dashed border-gray-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all cursor-pointer">
                                                 {editingItem.cover_image ? (
                                                     <>
                                                         <img src={`/uploads/${editingItem.cover_image}`} className="w-full h-full object-cover" />
@@ -606,7 +606,7 @@ const ContentManagement: React.FC = () => {
                                                             </div>
                                                         ) : (
                                                             <>
-                                                                <div className="p-5 bg-white rounded-3xl shadow-sm">
+                                                                <div className="p-5 bg-white dark:bg-slate-700 rounded-3xl shadow-sm">
                                                                     <ImageIcon size={32} />
                                                                 </div>
                                                                 <span className="text-xs font-bold">Resim Seçin</span>
@@ -628,14 +628,14 @@ const ContentManagement: React.FC = () => {
                                                     <button
                                                         type="button"
                                                         onClick={() => fileInputRef.current?.click()}
-                                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-50 border border-gray-100 text-gray-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition-all active:scale-95"
+                                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 text-gray-600 dark:text-slate-300 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 dark:hover:bg-slate-700 transition-all active:scale-95"
                                                     >
                                                         <FileUp size={14} /> Yükle
                                                     </button>
                                                     <button
                                                         type="button"
                                                         onClick={() => setShowCoverGenerator(true)}
-                                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 border border-blue-100 text-blue-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-100 transition-all active:scale-95"
+                                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all active:scale-95"
                                                     >
                                                         <RefreshCw size={14} /> Sihirbaz
                                                     </button>
@@ -649,7 +649,7 @@ const ContentManagement: React.FC = () => {
                                             <select
                                                 value={editingItem.category_id}
                                                 onChange={(e) => setEditingItem({ ...editingItem, category_id: parseInt(e.target.value) })}
-                                                className="w-full px-6 py-4 bg-gray-50/50 border border-gray-100 rounded-2xl text-sm font-bold focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer"
+                                                className="w-full px-6 py-4 bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 rounded-2xl text-sm font-bold focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all appearance-none cursor-pointer dark:text-white"
                                             >
                                                 <option value="">Kategori Seçin</option>
                                                 {categories.map(cat => {
@@ -674,38 +674,38 @@ const ContentManagement: React.FC = () => {
                                                 type="text"
                                                 value={editingItem.slug || ''}
                                                 onChange={(e) => setEditingItem({ ...editingItem, slug: e.target.value })}
-                                                className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl text-xs font-bold focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-200"
+                                                className="w-full px-6 py-4 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl text-xs font-bold focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-200 dark:placeholder:text-slate-600 dark:text-white"
                                                 placeholder="icerik-adresi"
                                                 required
                                             />
                                         </div>
 
                                         <div className="flex flex-col gap-4">
-                                            <div className="flex items-center gap-3 p-6 bg-gray-50/50 rounded-3xl border border-gray-100/50">
+                                            <div className="flex items-center gap-3 p-6 bg-gray-50/50 dark:bg-slate-800/50 rounded-3xl border border-gray-100/50 dark:border-slate-700/50">
                                                 <input
                                                     type="checkbox"
                                                     id="isPublished"
                                                     checked={editingItem.is_published}
                                                     onChange={(e) => setEditingItem({ ...editingItem, is_published: e.target.checked })}
-                                                    className="w-6 h-6 rounded-lg text-emerald-600 focus:ring-emerald-500 border-gray-200 transition-all cursor-pointer"
+                                                    className="w-6 h-6 rounded-lg text-emerald-600 focus:ring-emerald-500 border-gray-200 dark:border-slate-600 dark:bg-slate-700 transition-all cursor-pointer"
                                                 />
                                                 <label htmlFor="isPublished" className="cursor-pointer">
-                                                    <div className="text-sm font-black text-gray-900 tracking-tight leading-none">Yayınla</div>
-                                                    <div className="text-[10px] text-gray-400 font-bold mt-1">İçerik sitede görünür olacaktır</div>
+                                                    <div className="text-sm font-black text-gray-900 dark:text-white tracking-tight leading-none">Yayınla</div>
+                                                    <div className="text-[10px] text-gray-400 dark:text-slate-500 font-bold mt-1">İçerik sitede görünür olacaktır</div>
                                                 </label>
                                             </div>
 
-                                            <div className="flex items-center gap-3 p-6 bg-gray-50/50 rounded-3xl border border-gray-100/50">
+                                            <div className="flex items-center gap-3 p-6 bg-gray-50/50 dark:bg-slate-800/50 rounded-3xl border border-gray-100/50 dark:border-slate-700/50">
                                                 <input
                                                     type="checkbox"
                                                     id="requiresAuth"
                                                     checked={editingItem.requires_auth}
                                                     onChange={(e) => setEditingItem(prev => (prev ? { ...prev, requires_auth: e.target.checked } : null))}
-                                                    className="w-6 h-6 rounded-lg text-blue-600 focus:ring-blue-500 border-gray-200 transition-all cursor-pointer"
+                                                    className="w-6 h-6 rounded-lg text-blue-600 focus:ring-blue-500 border-gray-200 dark:border-slate-600 dark:bg-slate-700 transition-all cursor-pointer"
                                                 />
                                                 <label htmlFor="requiresAuth" className="cursor-pointer">
-                                                    <div className="text-sm font-black text-gray-900 tracking-tight leading-none">Üyelik Gerekli</div>
-                                                    <div className="text-[10px] text-gray-400 font-bold mt-1">Detayları sadece üyeler görebilir</div>
+                                                    <div className="text-sm font-black text-gray-900 dark:text-white tracking-tight leading-none">Üyelik Gerekli</div>
+                                                    <div className="text-[10px] text-gray-400 dark:text-slate-500 font-bold mt-1">Detayları sadece üyeler görebilir</div>
                                                 </label>
                                             </div>
                                         </div>
@@ -716,7 +716,7 @@ const ContentManagement: React.FC = () => {
                                                 type="text"
                                                 value={editingItem.prepared_by || ''}
                                                 onChange={(e) => setEditingItem(prev => (prev ? { ...prev, prepared_by: e.target.value } : null))}
-                                                className="w-full px-6 py-4 bg-gray-50/50 border border-gray-100 rounded-2xl text-sm font-bold focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-200"
+                                                className="w-full px-6 py-4 bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 rounded-2xl text-sm font-bold focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-200 dark:placeholder:text-slate-600 dark:text-white"
                                                 placeholder="İsim veya Kurum girin..."
                                             />
                                         </div>
@@ -750,9 +750,8 @@ const ContentManagement: React.FC = () => {
                                                         };
                                                     });
                                                 }}
-                                                className="w-full px-8 py-5 bg-gray-50 border border-gray-100 rounded-[2rem] text-xl font-black focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-200 tracking-tight"
+                                                className="w-full px-8 py-5 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-[2rem] text-xl font-black focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all placeholder:text-gray-200 dark:placeholder:text-slate-600 tracking-tight dark:text-white"
                                                 placeholder="İçerik başlığını girin..."
-                                                required
                                             />
                                         </div>
 
@@ -844,10 +843,10 @@ const ContentManagement: React.FC = () => {
                             </form>
                         </div>
 
-                        <div className="p-10 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-4">
+                        <div className="p-10 border-t border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-900 flex items-center justify-end gap-4">
                             <button
                                 onClick={() => setEditingItem(null)}
-                                className="px-10 py-5 text-sm font-black text-gray-400 hover:text-gray-900 transition-colors uppercase tracking-widest"
+                                className="px-10 py-5 text-sm font-black text-gray-400 dark:text-slate-500 hover:text-gray-900 dark:hover:text-white transition-colors uppercase tracking-widest"
                             >
                                 İptal
                             </button>
@@ -878,14 +877,14 @@ const ContentManagement: React.FC = () => {
 
 const MediaCard = ({ title, icon, value, color, onUpload, progress, onDelete }: any) => {
     const colorClasses: any = {
-        red: "bg-red-50 text-red-500 border-red-100",
-        purple: "bg-purple-50 text-purple-500 border-purple-100",
-        orange: "bg-orange-50 text-orange-500 border-orange-100",
-        emerald: "bg-emerald-50 text-emerald-500 border-emerald-100"
+        red: "bg-red-50 dark:bg-red-900/20 text-red-500 dark:text-red-400 border-red-100 dark:border-red-900/30",
+        purple: "bg-purple-50 dark:bg-purple-900/20 text-purple-500 dark:text-purple-400 border-purple-100 dark:border-purple-900/30",
+        orange: "bg-orange-50 dark:bg-orange-900/20 text-orange-500 dark:text-orange-400 border-orange-100 dark:border-orange-900/30",
+        emerald: "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30"
     };
 
     return (
-        <div className={`p-5 rounded-3xl border-2 transition-all flex flex-col items-center gap-3 relative min-h-[140px] justify-center ${value ? colorClasses[color] : 'bg-gray-50/50 border-gray-100 text-gray-400 hover:border-blue-100 hover:text-blue-500 cursor-pointer'}`} onClick={onUpload}>
+        <div className={`p-5 rounded-3xl border-2 transition-all flex flex-col items-center gap-3 relative min-h-[140px] justify-center ${value ? colorClasses[color] : 'bg-gray-50/50 dark:bg-slate-800/50 border-gray-100 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:border-blue-100 dark:hover:border-blue-900/50 hover:text-blue-500 dark:hover:text-blue-400 cursor-pointer'}`} onClick={onUpload}>
             {progress !== undefined ? (
                 <div className="flex flex-col items-center gap-2 w-full px-4 text-blue-600">
                     <div className="w-8 h-8 border-4 border-current border-t-transparent rounded-full animate-spin"></div>
@@ -896,7 +895,7 @@ const MediaCard = ({ title, icon, value, color, onUpload, progress, onDelete }: 
                 </div>
             ) : (
                 <>
-                    <div className={`p-4 rounded-2xl bg-white shadow-sm ${value ? 'text-current shadow-md' : 'text-gray-300'}`}>
+                    <div className={`p-4 rounded-2xl bg-white dark:bg-slate-900 shadow-sm ${value ? 'text-current shadow-md' : 'text-gray-300 dark:text-slate-600'}`}>
                         {icon}
                     </div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-center">{value ? "Yüklendi" : title}</div>

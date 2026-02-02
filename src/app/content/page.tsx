@@ -7,8 +7,9 @@ import {
     FileText, PlayCircle, BookOpen, Filter, ChevronRight, Search, Lock, Eye,
     Home, Users, Settings, MessageSquare, Menu, X, File, LogOut, User,
     ChevronDown, GraduationCap, FileCode, LayoutDashboard, Heart,
-    FolderTree, Layers, Calculator, Stethoscope
+    FolderTree, Layers, Calculator, Stethoscope, Sun, Moon
 } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useAuth } from '@/context/AuthContext';
 import DashboardView from '@/components/DashboardView';
 import ProfileView from '@/components/ProfileView';
@@ -24,6 +25,12 @@ function ContentPageContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { isAuthenticated, user, logout } = useAuth();
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const [activeTab, setActiveTab] = useState<string>(searchParams?.get('type') || 'all');
     const [viewMode, setViewMode] = useState<ViewMode>('content');
@@ -216,7 +223,7 @@ function ContentPageContent() {
 
 
     return (
-        <div className="fixed inset-0 z-50 flex bg-gray-100 font-sans">
+        <div className="fixed inset-0 z-50 flex bg-gray-100 dark:bg-slate-950 font-sans">
             {isSidebarOpen && (
                 <div
                     className="fixed inset-0 bg-black/50 z-40 md:hidden"
@@ -225,12 +232,12 @@ function ContentPageContent() {
             )}
 
             <aside className={`
-                fixed md:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 
+                fixed md:static inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 
                 transform transition-transform duration-200 ease-in-out h-full flex flex-col justify-between
                 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
             `}>
                 <div className="flex-1 overflow-y-auto">
-                    <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+                    <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-slate-800 sticky top-0 bg-white dark:bg-slate-900 z-10">
                         <Link href="/" className="flex items-center gap-2">
                             {/* Light Mode Logo */}
                             <img
@@ -245,6 +252,15 @@ function ContentPageContent() {
                                 className="h-8 w-auto hidden dark:block"
                             />
                         </Link>
+                        {mounted && (
+                            <button
+                                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                                className="p-2 rounded-full text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ml-2"
+                                aria-label="Toggle theme"
+                            >
+                                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                            </button>
+                        )}
                         <button
                             onClick={() => setIsSidebarOpen(false)}
                             className="block md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -258,8 +274,8 @@ function ContentPageContent() {
                             onClick={() => handleNavClick('content', 'all')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'content' && activeTab === 'all'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <Home size={20} />
                             Ana Sayfa
@@ -269,8 +285,8 @@ function ContentPageContent() {
                             onClick={() => handleNavClick('content', 'akademik')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'content' && activeTab === 'akademik'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <GraduationCap size={20} />
                             Akademik
@@ -280,8 +296,8 @@ function ContentPageContent() {
                             onClick={() => handleNavClick('content', 'dokuman')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'content' && activeTab === 'dokuman'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <FileCode size={20} />
                             Doküman
@@ -291,8 +307,8 @@ function ContentPageContent() {
                             onClick={() => handleNavClick('content', 'seminer')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'content' && activeTab === 'seminer'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <PlayCircle size={20} />
                             Seminer
@@ -302,8 +318,8 @@ function ContentPageContent() {
                             onClick={() => setViewMode('calculator')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'calculator'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <Calculator size={20} />
                             Ölçekler
@@ -313,8 +329,8 @@ function ContentPageContent() {
                             onClick={() => setViewMode('rx')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'rx'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <Stethoscope size={20} />
                             Reçeteci
@@ -324,8 +340,8 @@ function ContentPageContent() {
                             onClick={() => handleNavClick('forum')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                 ${viewMode === 'forum'
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'}`}
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                         >
                             <MessageSquare size={20} />
                             Forum
@@ -336,8 +352,8 @@ function ContentPageContent() {
                                 onClick={() => setViewMode('profile')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                     ${viewMode === 'profile'
-                                        ? 'bg-blue-50 text-blue-700'
-                                        : 'text-gray-600 hover:bg-gray-50'}`}
+                                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                        : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                             >
                                 <Settings size={20} />
                                 Profil Ayarları
@@ -349,8 +365,8 @@ function ContentPageContent() {
                                 onClick={() => setViewMode('admin')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium
                                     ${viewMode === 'admin'
-                                        ? 'bg-blue-50 text-blue-700'
-                                        : 'text-gray-600 hover:bg-gray-50'}`}
+                                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
+                                        : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800'}`}
                             >
                                 <LayoutDashboard size={20} />
                                 <span className="text-left flex-1">Yönetim Paneli</span>
@@ -360,7 +376,7 @@ function ContentPageContent() {
                     </nav>
 
                     <div className="px-6 my-2">
-                        <div className="h-px bg-gray-200"></div>
+                        <div className="h-px bg-gray-200 dark:bg-slate-800"></div>
                     </div>
 
                     <div className="p-4 pt-0">
@@ -394,9 +410,9 @@ function ContentPageContent() {
                                                         setSelectedCategory(category.id);
                                                     }}
                                                     className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all duration-200 group
-                                                    ${isSelected ? 'bg-blue-600 text-white shadow-md shadow-blue-200' :
-                                                            isParentSelected ? 'bg-blue-50 text-blue-700 font-medium' :
-                                                                'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}
+                                                    ${isSelected ? 'bg-blue-600 text-white shadow-md shadow-blue-200 dark:shadow-none' :
+                                                            isParentSelected ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-medium' :
+                                                                'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-slate-200'}`}
                                                 >
                                                     <span className="font-medium truncate">{category.name}</span>
                                                     <div className="flex items-center gap-2">
@@ -422,8 +438,8 @@ function ContentPageContent() {
                                                                     onClick={() => setSelectedCategory(subCategory.id)}
                                                                     className={`w-full flex items-center justify-between px-4 py-2 rounded-lg text-sm transition-all
                                                                     ${isSubSelected
-                                                                            ? 'bg-blue-100 text-blue-700 font-bold shadow-sm ring-1 ring-blue-200'
-                                                                            : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+                                                                            ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-bold shadow-sm ring-1 ring-blue-200 dark:ring-blue-800'
+                                                                            : 'text-gray-500 dark:text-slate-500 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-slate-300'
                                                                         }`}
                                                                 >
                                                                     <div className="flex items-center gap-2">
@@ -447,11 +463,11 @@ function ContentPageContent() {
 
                 {/* User Profile Summary at bottom */}
                 {isAuthenticated && user && (
-                    <div className="p-4 border-t border-gray-200 bg-gray-50/50">
+                    <div className="p-4 border-t border-gray-200 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-900/50">
                         <div className="relative">
                             <button
                                 onClick={() => setUserMenuOpen(!userMenuOpen)}
-                                className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all group"
+                                className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm transition-all group"
                             >
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm ring-2 ring-white group-hover:ring-blue-100 transition-all overflow-hidden">
                                     {user.profile_photo ? (
@@ -465,7 +481,7 @@ function ContentPageContent() {
                                     )}
                                 </div>
                                 <div className="flex-1 text-left min-w-0">
-                                    <p className="text-sm font-bold text-gray-800 truncate group-hover:text-blue-700 transition-colors">
+                                    <p className="text-sm font-bold text-gray-800 dark:text-slate-200 truncate group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
                                         {user.first_name} {user.last_name}
                                     </p>
                                     <p className="text-xs text-gray-400 truncate font-medium">
@@ -538,7 +554,7 @@ function ContentPageContent() {
                 )}
             </aside>
 
-            <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-gray-50 relative">
+            <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-gray-50 dark:bg-slate-950 relative">
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -665,7 +681,7 @@ function ContentPageContent() {
                                         placeholder="Konu, başlık veya anahtar kelime ara..."
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
-                                        className="block w-full pl-12 pr-12 py-4 bg-white border border-slate-200 rounded-2xl leading-5 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm text-sm font-medium"
+                                        className="block w-full pl-12 pr-12 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl leading-5 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm text-sm font-medium text-slate-900 dark:text-white"
                                     />
                                     {searchTerm && (
                                         <button
@@ -760,7 +776,7 @@ function ContentPageContent() {
                                         return (
                                             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 mb-8">
                                                 <div className="mb-6">
-                                                    <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                                                    <h2 className="text-xl font-bold text-gray-900 dark:text-slate-100 flex items-center gap-2">
                                                         {selectedCategory && (
                                                             <button
                                                                 onClick={() => {
@@ -790,25 +806,25 @@ function ContentPageContent() {
                                                                 setSelectedCategory(cat.id);
                                                                 setExpandedCategories(prev => [...new Set([...prev, cat.id])]);
                                                             }}
-                                                            className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-100 group transition-all text-left flex flex-col h-40 relative overflow-hidden"
+                                                            className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-blue-100 dark:hover:border-blue-900 group transition-all text-left flex flex-col h-40 relative overflow-hidden"
                                                         >
                                                             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
                                                                 <FolderTree size={64} className="text-blue-600" />
                                                             </div>
 
-                                                            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
+                                                            <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
                                                                 <Layers size={24} />
                                                             </div>
 
-                                                            <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors text-lg mb-1 truncate w-full">
+                                                            <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-lg mb-1 truncate w-full">
                                                                 {cat.name}
                                                             </h3>
-                                                            <div className="mt-auto flex items-center gap-3 text-xs font-medium text-gray-500">
-                                                                <span className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-md">
+                                                            <div className="mt-auto flex items-center gap-3 text-xs font-medium text-gray-500 dark:text-gray-400">
+                                                                <span className="flex items-center gap-1 bg-gray-50 dark:bg-slate-800 px-2 py-1 rounded-md">
                                                                     <FileText size={12} /> {cat.content_count || 0} İçerik
                                                                 </span>
                                                                 {categories.some(sub => sub.parent_id === cat.id) && (
-                                                                    <span className="flex items-center gap-1 bg-blue-50 text-blue-600 px-2 py-1 rounded-md">
+                                                                    <span className="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-md">
                                                                         <FolderTree size={12} /> Alt Kategori
                                                                     </span>
                                                                 )}
@@ -848,13 +864,13 @@ function ContentPageContent() {
                                                 ) : filteredContent.length > 0 ? (
                                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20">
                                                         {filteredContent.map((item) => (
-                                                            <div key={item.id} className="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 flex flex-col h-full transition-all duration-300 group relative overflow-hidden">
+                                                            <div key={item.id} className="bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-md border border-gray-100 dark:border-slate-800 flex flex-col h-full transition-all duration-300 group relative overflow-hidden">
                                                                 <div className={`absolute top-0 left-0 w-full h-1 z-20 ${item.content_type === 'pdf' ? 'bg-blue-500' :
                                                                     item.content_type === 'video' ? 'bg-rose-500' : 'bg-emerald-500'
                                                                     }`}></div>
 
                                                                 {item.cover_image && (
-                                                                    <div className="w-full h-36 overflow-hidden bg-gray-50 flex-shrink-0 relative border-b border-gray-50">
+                                                                    <div className="w-full h-36 overflow-hidden bg-gray-50 dark:bg-slate-800 flex-shrink-0 relative border-b border-gray-50 dark:border-slate-800">
                                                                         <img
                                                                             src={`/uploads/${item.cover_image}`}
                                                                             alt={item.title}
@@ -868,31 +884,31 @@ function ContentPageContent() {
                                                                 <div className="p-5 flex flex-col flex-1">
                                                                     <div className="flex justify-between items-start mb-3">
                                                                         <div className="flex flex-wrap gap-1 items-center">
-                                                                            <span className="p-1.5 rounded-lg bg-gray-50 text-gray-600 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                                                                            <span className="p-1.5 rounded-lg bg-gray-50 dark:bg-slate-800 text-gray-600 dark:text-slate-400 group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                                                                 {getContentTypeIcon(item.content_type)}
                                                                             </span>
                                                                             {item.pdf_url && (
-                                                                                <span className="text-[9px] font-black text-blue-600 uppercase tracking-wider border border-blue-100 bg-blue-50/50 px-1.5 py-0.5 rounded">
+                                                                                <span className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-wider border border-blue-100 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-900/20 px-1.5 py-0.5 rounded">
                                                                                     PDF
                                                                                 </span>
                                                                             )}
                                                                             {item.pptx_url && (
-                                                                                <span className="text-[9px] font-black text-orange-600 uppercase tracking-wider border border-orange-100 bg-orange-50/50 px-1.5 py-0.5 rounded">
+                                                                                <span className="text-[9px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-wider border border-orange-100 dark:border-orange-900 bg-orange-50/50 dark:bg-orange-900/20 px-1.5 py-0.5 rounded">
                                                                                     PPTX
                                                                                 </span>
                                                                             )}
                                                                             {item.video_url && (
-                                                                                <span className="text-[9px] font-black text-rose-600 uppercase tracking-wider border border-rose-100 bg-rose-50/50 px-1.5 py-0.5 rounded">
+                                                                                <span className="text-[9px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-wider border border-rose-100 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-900/20 px-1.5 py-0.5 rounded">
                                                                                     MP4
                                                                                 </span>
                                                                             )}
                                                                             {item.reference_pdf_url && (
-                                                                                <span className="text-[9px] font-black text-emerald-600 uppercase tracking-wider border border-emerald-100 bg-emerald-50/50 px-1.5 py-0.5 rounded">
+                                                                                <span className="text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider border border-emerald-100 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">
                                                                                     REF
                                                                                 </span>
                                                                             )}
                                                                             {!item.pdf_url && !item.pptx_url && !item.video_url && !item.reference_pdf_url && (
-                                                                                <span className="text-[9px] font-black text-emerald-600 uppercase tracking-wider border border-emerald-100 bg-emerald-50/50 px-1.5 py-0.5 rounded">
+                                                                                <span className="text-[9px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider border border-emerald-100 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">
                                                                                     YAZI
                                                                                 </span>
                                                                             )}
@@ -901,7 +917,7 @@ function ContentPageContent() {
                                                                             {isAuthenticated && (
                                                                                 <button
                                                                                     onClick={(e) => handleToggleFavorite(e, item)}
-                                                                                    className={`p-1.5 rounded-lg transition-all ${item.is_favorite ? 'bg-rose-50 text-rose-500' : 'bg-gray-50 text-gray-400 hover:text-rose-500 hover:bg-rose-50'}`}
+                                                                                    className={`p-1.5 rounded-lg transition-all ${item.is_favorite ? 'bg-rose-50 dark:bg-rose-900/20 text-rose-500 dark:text-rose-400' : 'bg-gray-50 dark:bg-slate-800 text-gray-400 dark:text-slate-500 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20'}`}
                                                                                 >
                                                                                     <Heart size={16} fill={item.is_favorite ? "currentColor" : "none"} />
                                                                                 </button>
@@ -912,23 +928,23 @@ function ContentPageContent() {
                                                                         </div>
                                                                     </div>
 
-                                                                    <h3 className="text-base font-bold text-gray-800 mb-2 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
+                                                                    <h3 className="text-base font-bold text-gray-800 dark:text-white mb-2 line-clamp-2 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                                                         {item.title}
                                                                     </h3>
 
-                                                                    <p className="text-sm text-gray-500 mb-6 line-clamp-3 leading-relaxed">
+                                                                    <p className="text-sm text-gray-500 dark:text-slate-400 mb-6 line-clamp-3 leading-relaxed">
                                                                         {item.description}
                                                                     </p>
 
-                                                                    <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                                                                        <div className="flex items-center gap-1 text-gray-400 text-xs">
+                                                                    <div className="mt-auto pt-4 border-t border-gray-50 dark:border-slate-800 flex items-center justify-between">
+                                                                        <div className="flex items-center gap-1 text-gray-400 dark:text-slate-500 text-xs">
                                                                             <Eye size={14} /> {item.views || 0}
                                                                         </div>
 
                                                                         {!isAuthenticated ? (
                                                                             <button
                                                                                 onClick={() => router.push('/login')}
-                                                                                className="text-xs font-bold text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1"
+                                                                                className="text-xs font-bold text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1"
                                                                             >
                                                                                 <Lock size={12} />
                                                                                 Giriş Yap
@@ -940,7 +956,7 @@ function ContentPageContent() {
                                                                                     params.set('slug', item.slug);
                                                                                     router.push(`/content?${params.toString()}`);
                                                                                 }}
-                                                                                className="text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 px-3 py-1.5 rounded-full transition-all flex items-center gap-1"
+                                                                                className="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 hover:text-blue-700 dark:hover:text-blue-300 px-3 py-1.5 rounded-full transition-all flex items-center gap-1"
                                                                             >
                                                                                 İncele
                                                                                 <ChevronRight size={12} />
@@ -952,15 +968,15 @@ function ContentPageContent() {
                                                         ))}
                                                     </div>
                                                 ) : (
-                                                    <div className="text-center py-20 bg-white rounded-xl border border-dashed border-gray-300 mx-auto max-w-2xl">
-                                                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
+                                                    <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-xl border border-dashed border-gray-300 dark:border-slate-700 mx-auto max-w-2xl">
+                                                        <div className="w-16 h-16 bg-gray-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400 dark:text-slate-500">
                                                             <Search size={32} />
                                                         </div>
-                                                        <h3 className="text-lg font-bold text-gray-800 mb-1">Aradığınız kriterde içerik bulunamadı</h3>
-                                                        <p className="text-gray-500 text-sm mb-6">Farklı bir kategori seçmeyi deneyin.</p>
+                                                        <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-1">Aradığınız kriterde içerik bulunamadı</h3>
+                                                        <p className="text-gray-500 dark:text-slate-400 text-sm mb-6">Farklı bir kategori seçmeyi deneyin.</p>
                                                         <button
                                                             onClick={() => { setActiveTab('all'); setSelectedCategory(null); setSearchTerm(''); }}
-                                                            className="text-blue-600 font-bold hover:underline text-sm"
+                                                            className="text-blue-600 dark:text-blue-400 font-bold hover:underline text-sm"
                                                         >
                                                             Tüm İçerikleri Listele
                                                         </button>
