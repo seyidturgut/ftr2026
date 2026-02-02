@@ -73,14 +73,14 @@ const DashboardView: React.FC = () => {
     return (
         <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg shadow-blue-200">
+                <div className="bg-gradient-to-br from-indigo-500 to-blue-600 dark:from-indigo-900/50 dark:to-blue-900/50 dark:bg-slate-900 rounded-2xl p-6 text-white shadow-lg shadow-blue-200 dark:shadow-none dark:border dark:border-indigo-500/30">
                     <div className="flex items-center gap-4 mb-2">
-                        <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                        <div className="p-3 bg-white/20 dark:bg-indigo-500/20 rounded-xl backdrop-blur-sm">
                             <Star size={24} className="text-yellow-300" fill="currentColor" />
                         </div>
                         <div>
-                            <p className="text-blue-100 text-sm font-medium">Favorilerim</p>
-                            <h3 className="text-2xl font-bold">{stats.favorites} içerik</h3>
+                            <p className="text-blue-100 dark:text-indigo-200 text-sm font-medium">Favorilerim</p>
+                            <h3 className="text-2xl font-bold text-white">{stats.favorites} içerik</h3>
                         </div>
                     </div>
                 </div>

@@ -341,7 +341,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                 <div className="w-full lg:w-1/2 p-4 lg:p-8 overflow-y-auto bg-gray-100 dark:bg-slate-900/50 flex justify-center border-b lg:border-r border-gray-200 dark:border-slate-800 lg:h-full">
                     <div
                         ref={printableRef}
-                        className="bg-white shadow-xl w-full max-w-[210mm] min-h-[297mm] p-[30px] sm:p-[40px] relative flex flex-col print:shadow-none print:w-full print:h-full print:absolute print:top-0 print:left-0 print:m-0 print:p-[20mm]"
+                        className="bg-white shadow-xl w-full max-w-[210mm] min-h-[297mm] p-[30px] sm:p-[40px] relative flex flex-col print:shadow-none print:w-full print:h-full print:absolute print:top-0 print:left-0 print:m-0 print:p-[20mm] text-gray-900"
                     >
                         {/* Header */}
                         <div className="border-b-2 border-black pb-4 mb-6">
@@ -356,7 +356,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                         type="date"
                                         value={date}
                                         onChange={(e) => setDate(e.target.value)}
-                                        className="bg-transparent border-gray-300 focus:border-blue-500 outline-none w-full print:border-none"
+                                        className="bg-transparent border-gray-300 focus:border-blue-500 outline-none w-full print:border-none text-gray-900"
                                     />
                                 </div>
                                 <div className="flex items-center gap-2">
@@ -366,7 +366,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                         placeholder="SGK / Özel..."
                                         value={institution}
                                         onChange={(e) => setInstitution(e.target.value)}
-                                        className="bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none w-full print:border-none print:placeholder-transparent"
+                                        className="bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none w-full print:border-none print:placeholder-transparent text-gray-900"
                                     />
                                 </div>
                                 <div className="flex items-center gap-2 col-span-2">
@@ -376,7 +376,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                         placeholder="Adı Soyadı"
                                         value={patientName}
                                         onChange={(e) => setPatientName(e.target.value)}
-                                        className="bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none w-full font-medium print:border-none print:placeholder-transparent"
+                                        className="bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none w-full font-medium print:border-none print:placeholder-transparent text-gray-900"
                                     />
                                 </div>
                                 <div className="flex items-center gap-2 col-span-2">
@@ -386,7 +386,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                         placeholder="ICD Kodu / Tanı..."
                                         value={diagnosis}
                                         onChange={(e) => setDiagnosis(e.target.value)}
-                                        className="bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none w-full print:border-none print:placeholder-transparent"
+                                        className="bg-transparent border-b border-gray-300 focus:border-blue-500 outline-none w-full print:border-none print:placeholder-transparent text-gray-900"
                                     />
                                 </div>
                             </div>
@@ -444,7 +444,7 @@ export default function PrescriptionGenerator({ onBack }: { onBack: () => void }
                                             placeholder="Dr. Adı Soyadı&#10;Dip. No: ..."
                                             value={doctorInfo}
                                             onChange={(e) => setDoctorInfo(e.target.value)}
-                                            className="w-full text-center text-xs bg-transparent outline-none resize-none h-12 mt-1 print:hidden focus:bg-gray-50"
+                                            className="w-full text-center text-xs bg-transparent outline-none resize-none h-12 mt-1 print:hidden focus:bg-gray-50 text-gray-900"
                                         />
                                     </div>
                                 </div>

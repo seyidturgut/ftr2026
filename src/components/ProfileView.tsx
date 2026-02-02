@@ -111,7 +111,7 @@ const ProfileView: React.FC = () => {
         <div className="max-w-3xl mx-auto">
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden">
                 {/* Compact Header */}
-                <div className="bg-gradient-to-r from-blue-600 to-sky-600 px-4 py-6">
+                <div className="bg-gradient-to-r from-blue-600 to-sky-600 dark:from-blue-900 dark:to-sky-900 px-4 py-6">
                     <div className="flex items-center gap-3">
                         <div className="relative group">
                             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center ring-2 ring-white/50">
@@ -285,7 +285,7 @@ const ProfileView: React.FC = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full md:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full md:w-auto px-6 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <>
