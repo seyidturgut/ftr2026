@@ -76,15 +76,15 @@ export default function BasfiCalculator({ onBack }: { onBack: () => void }) {
         onChange: (val: number) => void,
         index: number
     }) => (
-        <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm h-full flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm h-full flex flex-col justify-between">
             <div className="flex justify-between items-start mb-2 gap-2">
                 <div className="flex gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gray-100 text-gray-500 text-xs font-bold rounded-full">
+                    <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400 text-xs font-bold rounded-full">
                         {index}
                     </span>
-                    <label className="text-sm font-medium text-gray-800 leading-tight block pt-0.5">{label}</label>
+                    <label className="text-sm font-medium text-gray-800 dark:text-slate-200 leading-tight block pt-0.5">{label}</label>
                 </div>
-                <div className="w-10 h-8 flex items-center justify-center bg-blue-50 text-blue-700 font-bold rounded-md text-sm shrink-0">
+                <div className="w-10 h-8 flex items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-bold rounded-md text-sm shrink-0">
                     {value}
                 </div>
             </div>
@@ -95,9 +95,9 @@ export default function BasfiCalculator({ onBack }: { onBack: () => void }) {
                 step="0.1"
                 value={value}
                 onChange={(e) => onChange(parseFloat(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-2"
+                className="w-full h-2 bg-gray-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600 dark:accent-blue-500 mt-2"
             />
-            <div className="flex justify-between text-[10px] text-gray-400 px-1 mt-1">
+            <div className="flex justify-between text-[10px] text-gray-400 dark:text-slate-500 px-1 mt-1">
                 <span>Kolay</span>
                 <span>Zor</span>
                 <span>İmkansız</span>
@@ -108,20 +108,20 @@ export default function BasfiCalculator({ onBack }: { onBack: () => void }) {
     return (
         <div className="max-w-6xl mx-auto pb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6 border-b border-gray-200 pb-4">
+            <div className="flex items-center justify-between mb-6 border-b border-gray-200 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={onBack}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-gray-900"
+                        className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
                     >
                         <ChevronLeft size={24} />
                     </button>
                     <div>
-                        <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                            <CheckCircle2 className="text-emerald-600" size={24} />
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                            <CheckCircle2 className="text-emerald-600 dark:text-emerald-500" size={24} />
                             BASFI Hesaplayıcı
                         </h1>
-                        <p className="text-sm text-gray-500 hidden sm:block">Bath Ankylosing Spondylitis Functional Index</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400 hidden sm:block">Bath Ankylosing Spondylitis Functional Index</p>
                     </div>
                 </div>
 
@@ -200,10 +200,10 @@ export default function BasfiCalculator({ onBack }: { onBack: () => void }) {
                         />
                     </div>
 
-                    <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center justify-end gap-3 sticky bottom-4 z-10 lg:static">
+                    <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm flex items-center justify-end gap-3 sticky bottom-4 z-10 lg:static">
                         <button
                             onClick={handleReset}
-                            className="px-5 py-3 rounded-xl border border-gray-200 text-gray-600 font-bold hover:bg-gray-50 flex items-center justify-center gap-2 transition-all"
+                            className="px-5 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-slate-400 font-bold hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2 transition-all"
                         >
                             <RefreshCw size={18} />
                             Sıfırla
@@ -232,15 +232,15 @@ export default function BasfiCalculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-6 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64 sticky top-4">
+                        <div className="p-6 rounded-3xl border border-dashed border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-900/50 flex flex-col items-center justify-center text-center text-gray-400 dark:text-slate-600 h-64 sticky top-4">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium">Sonuç burada görünecek</p>
                             <p className="text-xs mt-2 max-w-[200px]">10 soruyu yanıtladıktan sonra hesapla butonuna basınız.</p>
                         </div>
                     )}
 
-                    <div className="bg-blue-50/50 p-5 rounded-2xl border border-blue-100 text-xs text-blue-900 leading-relaxed">
-                        <h3 className="font-bold flex items-center gap-2 mb-2 text-blue-700 text-sm">
+                    <div className="bg-blue-50/50 dark:bg-blue-900/10 p-5 rounded-2xl border border-blue-100 dark:border-blue-900/30 text-xs text-blue-900 dark:text-blue-100 leading-relaxed">
+                        <h3 className="font-bold flex items-center gap-2 mb-2 text-blue-700 dark:text-blue-300 text-sm">
                             <AlertCircle size={16} />
                             BASFI Hakkında
                         </h3>

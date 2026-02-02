@@ -112,7 +112,7 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
     }) => (
         <div className="space-y-3 bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm h-full flex flex-col justify-between">
             <div className="flex justify-between items-center mb-2">
-                <label className="text-sm font-medium text-gray-700 dark:text-slate-300 leading-tight">{label}</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-slate-200 leading-tight">{label}</label>
                 <div className="w-10 h-8 flex items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-bold rounded-md text-sm shrink-0 ml-2">
                     {value}
                 </div>
@@ -193,7 +193,7 @@ export default function AsdasCrpCalculator({ onBack }: { onBack: () => void }) {
 
                     <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/2">
-                            <label className={`block text-sm font-medium mb-2 ${errors.crp ? 'text-red-500' : 'text-gray-700 dark:text-slate-300'}`}>
+                            <label className={`block text-sm font-medium mb-2 ${errors.crp ? 'text-red-500 dark:text-red-400' : 'text-gray-700 dark:text-slate-300'}`}>
                                 CRP Değeri (mg/L) {errors.crp && <span className="text-xs text-red-500 ml-1">(Lütfen geçerli değer giriniz)</span>}
                             </label>
                             <input

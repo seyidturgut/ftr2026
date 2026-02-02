@@ -113,13 +113,13 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
         max?: number,
         description?: string
     }) => (
-        <div className="space-y-3 bg-white p-5 rounded-xl border border-gray-100 shadow-sm h-full flex flex-col justify-between">
+        <div className="space-y-3 bg-white dark:bg-slate-900 p-5 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm h-full flex flex-col justify-between">
             <div className="flex justify-between items-start mb-2 gap-2">
                 <div>
-                    <label className="text-sm font-bold text-gray-800 leading-tight block">{label}</label>
-                    {description && <p className="text-xs text-gray-500 mt-1 leading-snug">{description}</p>}
+                    <label className="text-sm font-bold text-gray-800 dark:text-slate-200 leading-tight block">{label}</label>
+                    {description && <p className="text-xs text-gray-500 dark:text-slate-400 mt-1 leading-snug">{description}</p>}
                 </div>
-                <div className="w-12 h-9 flex items-center justify-center bg-blue-50 text-blue-700 font-bold rounded-lg text-lg shrink-0">
+                <div className="w-12 h-9 flex items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-bold rounded-lg text-lg shrink-0">
                     {value}
                 </div>
             </div>
@@ -130,9 +130,9 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
                 step="1"
                 value={value}
                 onChange={(e) => onChange(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 mt-2"
+                className="w-full h-2 bg-gray-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600 dark:accent-blue-500 mt-2"
             />
-            <div className="flex justify-between text-[10px] text-gray-400 px-1 mt-1 font-medium">
+            <div className="flex justify-between text-[10px] text-gray-400 dark:text-slate-500 px-1 mt-1 font-medium">
                 <span>0</span>
                 <span>{Math.round(max / 2)}</span>
                 <span>{max}</span>
@@ -143,20 +143,20 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
     return (
         <div className="max-w-5xl mx-auto pb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-5">
+            <div className="flex items-center justify-between mb-8 border-b border-gray-200 dark:border-slate-800 pb-5">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={onBack}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-gray-900"
+                        className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
                     >
                         <ChevronLeft size={24} />
                     </button>
                     <div>
-                        <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                            <Thermometer className="text-cyan-600" size={24} />
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                            <Thermometer className="text-cyan-600 dark:text-cyan-400" size={24} />
                             DAPSA Hesaplayıcı
                         </h1>
-                        <p className="text-sm text-gray-500">Disease Activity in Psoriatic Arthritis</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400">Disease Activity in Psoriatic Arthritis</p>
                     </div>
                 </div>
 
@@ -207,12 +207,12 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
                     </div>
 
                     {/* CRP Input */}
-                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col md:flex-row gap-6 items-center">
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 items-center">
                         <div className="w-full md:w-1/2">
-                            <label className={`block text-sm font-bold mb-2 flex items-center gap-2 ${errors.crp ? 'text-red-600' : 'text-gray-800'}`}>
-                                <TestTube size={16} className={errors.crp ? 'text-red-600' : 'text-cyan-600'} />
+                            <label className={`block text-sm font-bold mb-2 flex items-center gap-2 ${errors.crp ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-slate-200'}`}>
+                                <TestTube size={16} className={errors.crp ? 'text-red-600' : 'text-cyan-600 dark:text-cyan-400'} />
                                 CRP Değeri (mg/dL)
-                                <span className={`text-xs font-normal ml-1 ${errors.crp ? 'text-red-400' : 'text-gray-500'}`}>(Dikkat: mg/dL)</span>
+                                <span className={`text-xs font-normal ml-1 ${errors.crp ? 'text-red-400' : 'text-gray-500 dark:text-slate-400'}`}>(Dikkat: mg/dL)</span>
                             </label>
                             <input
                                 type="number"
@@ -225,10 +225,10 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
                                     if (errors.crp) setErrors({ ...errors, crp: false });
                                 }}
                                 className={`
-                                    w-full px-4 py-3 rounded-lg border outline-none transition-all font-medium text-gray-900 duration-300
+                                    w-full px-4 py-3 rounded-lg border outline-none transition-all font-medium text-gray-900 dark:text-white
                                     ${errors.crp
-                                        ? 'border-red-500 bg-red-50 focus:ring-4 focus:ring-red-500/20 focus:border-red-600'
-                                        : 'border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500'}
+                                        ? 'border-red-500 bg-red-50 dark:bg-red-900/10 focus:ring-4 focus:ring-red-500/20 focus:border-red-600'
+                                        : 'border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:focus:border-blue-400'}
                                     ${animateError.crp ? 'scale-105 shadow-lg shadow-red-200' : ''}
                                 `}
                             />
@@ -236,7 +236,7 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
                         <div className="w-full md:w-1/2 flex items-center gap-3">
                             <button
                                 onClick={handleReset}
-                                className="px-5 py-3 rounded-xl border border-gray-200 text-gray-600 font-bold hover:bg-gray-50 flex items-center justify-center gap-2 transition-all flex-1"
+                                className="px-5 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-slate-400 font-bold hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2 transition-all flex-1"
                             >
                                 <RefreshCw size={18} />
                                 Sıfırla
@@ -266,34 +266,34 @@ export default function DapsaCalculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64">
+                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-900/50 flex flex-col items-center justify-center text-center text-gray-400 dark:text-slate-600 h-64">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium text-lg">Sonuç Bekleniyor</p>
                             <p className="text-sm mt-2 max-w-[200px]">Değerleri girdikten sonra hesapla butonuna basınız.</p>
                         </div>
                     )}
 
-                    <div className="bg-cyan-50/50 p-6 rounded-2xl border border-cyan-100 text-sm text-cyan-900 leading-relaxed">
-                        <h3 className="font-bold flex items-center gap-2 mb-3 text-cyan-700">
+                    <div className="bg-cyan-50/50 dark:bg-blue-900/10 p-6 rounded-2xl border border-cyan-100 dark:border-blue-900/30 text-sm text-cyan-900 dark:text-blue-100 leading-relaxed">
+                        <h3 className="font-bold flex items-center gap-2 mb-3 text-cyan-700 dark:text-blue-300">
                             <AlertCircle size={18} />
                             Referans Değerler
                         </h3>
                         <div className="space-y-2.5">
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
-                                <span>≤ 4</span>
-                                <span className="font-bold text-emerald-600 text-xs">Remisyon</span>
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
+                                <span>&lt; 4</span>
+                                <span className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Remisyon</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>4 - 14</span>
-                                <span className="font-bold text-blue-600 text-xs">Düşük Aktivite</span>
+                                <span className="font-bold text-blue-600 dark:text-blue-400 text-xs">Düşük Aktivite</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>14 - 28</span>
-                                <span className="font-bold text-orange-600 text-xs">Orta Aktivite</span>
+                                <span className="font-bold text-orange-600 dark:text-orange-400 text-xs">Orta Aktivite</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>&gt; 28</span>
-                                <span className="font-bold text-rose-600 text-xs">Yüksek Aktivite</span>
+                                <span className="font-bold text-rose-600 dark:text-rose-400 text-xs">Yüksek Aktivite</span>
                             </div>
                         </div>
                     </div>

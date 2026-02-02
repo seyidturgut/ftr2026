@@ -95,20 +95,20 @@ export default function SledaiCalculator({ onBack }: { onBack: () => void }) {
     return (
         <div className="max-w-5xl mx-auto pb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-5">
+            <div className="flex items-center justify-between mb-8 border-b border-gray-200 dark:border-slate-800 pb-5">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={onBack}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-gray-900"
+                        className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
                     >
                         <ChevronLeft size={24} />
                     </button>
                     <div>
-                        <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                            <ListChecks className="text-red-600" size={24} />
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                            <ListChecks className="text-red-600 dark:text-red-500" size={24} />
                             SLEDAI Hesaplayıcı
                         </h1>
-                        <p className="text-sm text-gray-500">Systemic Lupus Erythematosus Disease Activity Index</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400">Systemic Lupus Erythematosus Disease Activity Index</p>
                     </div>
                 </div>
 
@@ -124,15 +124,15 @@ export default function SledaiCalculator({ onBack }: { onBack: () => void }) {
 
                 {/* Inputs: Features List */}
                 <div className="lg:col-span-3">
-                    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-                        <div className="p-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
-                            <span className="font-bold text-gray-700">Klinik ve Laboratuvar Bulguları</span>
-                            <span className="text-xs text-gray-500 bg-white px-2 py-1 rounded border">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                        <div className="p-4 bg-gray-50 dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 flex justify-between items-center">
+                            <span className="font-bold text-gray-700 dark:text-slate-300">Klinik ve Laboratuvar Bulguları</span>
+                            <span className="text-xs text-gray-500 dark:text-slate-400 bg-white dark:bg-slate-900 px-2 py-1 rounded border dark:border-slate-700">
                                 {selectedItems.length} seçili
                             </span>
                         </div>
 
-                        <div className="divide-y divide-gray-100">
+                        <div className="divide-y divide-gray-100 dark:divide-slate-800">
                             {SLEDAI_ITEMS.map((item) => {
                                 const isSelected = selectedItems.includes(item.id);
                                 return (
@@ -140,23 +140,23 @@ export default function SledaiCalculator({ onBack }: { onBack: () => void }) {
                                         key={item.id}
                                         onClick={() => toggleItem(item.id)}
                                         className={`
-                                            p-4 flex items-start gap-4 cursor-pointer transition-colors hover:bg-gray-50
-                                            ${isSelected ? 'bg-red-50/50 hover:bg-red-50' : ''}
+                                            p-4 flex items-start gap-4 cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-slate-800
+                                            ${isSelected ? 'bg-red-50/50 dark:bg-red-900/10 hover:bg-red-50 dark:hover:bg-red-900/20' : ''}
                                         `}
                                     >
-                                        <div className={`mt-0.5 transition-colors ${isSelected ? 'text-red-600' : 'text-gray-300'}`}>
+                                        <div className={`mt-0.5 transition-colors ${isSelected ? 'text-red-600 dark:text-red-400' : 'text-gray-300 dark:text-slate-600'}`}>
                                             {isSelected ? <CheckSquare size={22} /> : <Square size={22} />}
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start">
-                                                <h4 className={`font-bold ${isSelected ? 'text-red-700' : 'text-gray-800'}`}>
+                                                <h4 className={`font-bold ${isSelected ? 'text-red-700 dark:text-red-400' : 'text-gray-800 dark:text-slate-200'}`}>
                                                     {item.name}
                                                 </h4>
-                                                <span className={`text-xs font-bold px-2 py-0.5 rounded ml-2 ${isSelected ? 'bg-red-200 text-red-800' : 'bg-gray-100 text-gray-500'}`}>
+                                                <span className={`text-xs font-bold px-2 py-0.5 rounded ml-2 ${isSelected ? 'bg-red-200 dark:bg-red-900/40 text-red-800 dark:text-red-200' : 'bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400'}`}>
                                                     {item.weight} Puan
                                                 </span>
                                             </div>
-                                            <p className="text-sm text-gray-500 mt-1 leading-snug">
+                                            <p className="text-sm text-gray-500 dark:text-slate-400 mt-1 leading-snug">
                                                 {item.description}
                                             </p>
                                         </div>
@@ -167,10 +167,10 @@ export default function SledaiCalculator({ onBack }: { onBack: () => void }) {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-end gap-3 sticky bottom-4 z-10 lg:static mt-6">
+                    <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm flex items-center justify-end gap-3 sticky bottom-4 z-10 lg:static mt-6">
                         <button
                             onClick={handleReset}
-                            className="px-6 py-3 rounded-xl border border-gray-200 text-gray-600 font-bold hover:bg-gray-50 flex items-center justify-center gap-2 transition-all"
+                            className="px-6 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-slate-400 font-bold hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2 transition-all"
                         >
                             <RefreshCw size={18} />
                             Seçimi Temizle
@@ -199,38 +199,38 @@ export default function SledaiCalculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64">
+                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-900/50 flex flex-col items-center justify-center text-center text-gray-400 dark:text-slate-600 h-64">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium text-lg">Sonuç Bekleniyor</p>
                             <p className="text-sm mt-2 max-w-[200px]">Listeden bulguları işaretledikten sonra hesapla butonuna basınız.</p>
                         </div>
                     )}
 
-                    <div className="bg-red-50/50 p-6 rounded-2xl border border-red-100 text-sm text-red-900 leading-relaxed">
-                        <h3 className="font-bold flex items-center gap-2 mb-3 text-red-700">
+                    <div className="bg-red-50/50 dark:bg-red-900/10 p-6 rounded-2xl border border-red-100 dark:border-red-900/30 text-sm text-red-900 dark:text-red-100 leading-relaxed">
+                        <h3 className="font-bold flex items-center gap-2 mb-3 text-red-700 dark:text-red-400">
                             <AlertCircle size={18} />
                             Referans Değerler
                         </h3>
                         <div className="space-y-2.5">
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>0</span>
-                                <span className="font-bold text-emerald-600 text-xs">Aktivite Yok</span>
+                                <span className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Aktivite Yok</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>1 - 5</span>
-                                <span className="font-bold text-blue-600 text-xs">Hafif</span>
+                                <span className="font-bold text-blue-600 dark:text-blue-400 text-xs">Hafif</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>6 - 10</span>
-                                <span className="font-bold text-orange-600 text-xs">Orta</span>
+                                <span className="font-bold text-orange-600 dark:text-orange-400 text-xs">Orta</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>11 - 19</span>
-                                <span className="font-bold text-rose-600 text-xs">Yüksek</span>
+                                <span className="font-bold text-rose-600 dark:text-rose-400 text-xs">Yüksek</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>&ge; 20</span>
-                                <span className="font-bold text-red-800 text-xs">Çok Yüksek</span>
+                                <span className="font-bold text-red-800 dark:text-red-400 text-xs">Çok Yüksek</span>
                             </div>
                         </div>
                     </div>

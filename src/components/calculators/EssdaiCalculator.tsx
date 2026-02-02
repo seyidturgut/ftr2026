@@ -87,20 +87,20 @@ export default function EssdaiCalculator({ onBack }: { onBack: () => void }) {
     return (
         <div className="max-w-5xl mx-auto pb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-5">
+            <div className="flex items-center justify-between mb-8 border-b border-gray-200 dark:border-slate-800 pb-5">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={onBack}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500 hover:text-gray-900"
+                        className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
                     >
                         <ChevronLeft size={24} />
                     </button>
                     <div>
-                        <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                            <Layers className="text-pink-600" size={24} />
+                        <h1 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                            <Layers className="text-pink-600 dark:text-pink-500" size={24} />
                             ESSDAI Hesaplayıcı
                         </h1>
-                        <p className="text-sm text-gray-500">EULAR Sjögren's Syndrome Disease Activity Index</p>
+                        <p className="text-sm text-gray-500 dark:text-slate-400">EULAR Sjögren's Syndrome Disease Activity Index</p>
                     </div>
                 </div>
 
@@ -118,17 +118,17 @@ export default function EssdaiCalculator({ onBack }: { onBack: () => void }) {
                 <div className="lg:col-span-3">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {DOMAINS.map((domain) => (
-                            <div key={domain.id} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <div key={domain.id} className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
                                 <div className="flex justify-between items-center mb-3">
-                                    <label className="font-bold text-gray-800 flex items-center gap-2">
+                                    <label className="font-bold text-gray-800 dark:text-slate-200 flex items-center gap-2">
                                         {domain.name}
-                                        <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded border border-gray-200">
+                                        <span className="text-[10px] bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400 px-1.5 py-0.5 rounded border border-gray-200 dark:border-slate-700">
                                             Ağırlık: {domain.weight}
                                         </span>
                                     </label>
                                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-colors ${selections[domain.id] > 0
-                                        ? 'bg-pink-100 text-pink-700'
-                                        : 'bg-gray-50 text-gray-300'
+                                        ? 'bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-400'
+                                        : 'bg-gray-50 dark:bg-slate-800 text-gray-300 dark:text-slate-600'
                                         }`}>
                                         {selections[domain.id]}
                                     </div>
@@ -148,8 +148,8 @@ export default function EssdaiCalculator({ onBack }: { onBack: () => void }) {
                                                     className={`
                                                         px-2 py-1.5 text-xs rounded-lg border transition-all flex items-center justify-center gap-1.5
                                                         ${isSelected
-                                                            ? 'bg-pink-600 text-white border-pink-600 shadow-sm'
-                                                            : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+                                                            ? 'bg-pink-600 dark:bg-pink-600 text-white border-pink-600 shadow-sm'
+                                                            : 'bg-white dark:bg-slate-950 text-gray-600 dark:text-slate-400 border-gray-200 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-900'
                                                         }
                                                     `}
                                                 >
@@ -167,10 +167,10 @@ export default function EssdaiCalculator({ onBack }: { onBack: () => void }) {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-end gap-3 sticky bottom-4 z-10 lg:static mt-6">
+                    <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm flex items-center justify-end gap-3 sticky bottom-4 z-10 lg:static mt-6">
                         <button
                             onClick={handleReset}
-                            className="px-6 py-3 rounded-xl border border-gray-200 text-gray-600 font-bold hover:bg-gray-50 flex items-center justify-center gap-2 transition-all"
+                            className="px-6 py-3 rounded-xl border border-gray-200 dark:border-slate-700 text-gray-600 dark:text-slate-400 font-bold hover:bg-gray-50 dark:hover:bg-slate-800 flex items-center justify-center gap-2 transition-all"
                         >
                             <RefreshCw size={18} />
                             Sıfırla
@@ -199,30 +199,30 @@ export default function EssdaiCalculator({ onBack }: { onBack: () => void }) {
                             </div>
                         </div>
                     ) : (
-                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center text-gray-400 h-64">
+                        <div className="p-8 rounded-3xl border border-dashed border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-900/50 flex flex-col items-center justify-center text-center text-gray-400 dark:text-slate-600 h-64">
                             <Activity size={48} className="mb-4 opacity-50" />
                             <p className="font-medium text-lg">Sonuç Bekleniyor</p>
                             <p className="text-sm mt-2 max-w-[200px]">Alanları doldurduktan sonra hesapla butonuna basınız.</p>
                         </div>
                     )}
 
-                    <div className="bg-pink-50/50 p-6 rounded-2xl border border-pink-100 text-sm text-pink-900 leading-relaxed">
-                        <h3 className="font-bold flex items-center gap-2 mb-3 text-pink-700">
+                    <div className="bg-pink-50/50 dark:bg-pink-900/10 p-6 rounded-2xl border border-pink-100 dark:border-pink-900/30 text-sm text-pink-900 dark:text-pink-100 leading-relaxed">
+                        <h3 className="font-bold flex items-center gap-2 mb-3 text-pink-700 dark:text-pink-400">
                             <AlertCircle size={18} />
                             Referans Değerler
                         </h3>
                         <div className="space-y-2.5">
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>&lt; 5</span>
-                                <span className="font-bold text-emerald-600 text-xs">Düşük Aktivite</span>
+                                <span className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Düşük Aktivite</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>5 - 13</span>
-                                <span className="font-bold text-orange-600 text-xs">Orta Aktivite</span>
+                                <span className="font-bold text-orange-600 dark:text-orange-400 text-xs">Orta Aktivite</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-white/60 rounded-lg">
+                            <div className="flex justify-between items-center p-2 bg-white/60 dark:bg-slate-900/50 rounded-lg">
                                 <span>&ge; 14</span>
-                                <span className="font-bold text-rose-600 text-xs">Yüksek Aktivite</span>
+                                <span className="font-bold text-rose-600 dark:text-rose-400 text-xs">Yüksek Aktivite</span>
                             </div>
                         </div>
                         <p className="mt-4 text-xs opacity-70">
